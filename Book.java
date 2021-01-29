@@ -43,14 +43,16 @@ public class Book{
 
 
     public boolean equals(Object obj){
-        if(this.number = obj){
+        //if (this.number == ((Book) obj).number)
+        //this.number.compareTo(((Book) obj).number)
+        if(this.number == obj){
             return true;
         }
     }
 
     public String toString(){
-        String output = "Book#" + this.number + "::" + this.name + "::"+ this.date.+"::"+ this.checkedOut;
-        return ;
+        String output = "Book#" + this.number + "::" + this.name + "::"+ this.date +"::"+ this.checkedOut;
+        return output;
     }
 
 
