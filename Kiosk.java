@@ -71,6 +71,7 @@ public class Kiosk {
                 default:
                     break;
             }
+            //TESTING PURPOSES:
             System.out.println("\n" + tokens[0]);
         }
 
