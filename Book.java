@@ -41,18 +41,22 @@ public class Book{
         this.date = date;
     }
 
-
+    //we can typecast an obj to our own class
+    //use equals method
+    @Override
     public boolean equals(Object obj){
-        if(this.number = obj){
+        if(this.number.equals(((Book) obj).number)){
             return true;
+        }
+        else {
+            return false;
         }
     }
 
+    @Override
     public String toString(){
-        String output = "Book#" + this.number + "::" + this.name + "::"+ this.date.+"::"+ this.checkedOut;
-        return ;
+        String output = "Book#" + this.number + "::" + this.name + "::"+ this.date +"::"+ this.checkedOut;
+        return output;
     }
-
-
 
 }
