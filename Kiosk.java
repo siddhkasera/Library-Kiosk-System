@@ -2,18 +2,22 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Kiosk {
+    Scanner in = new Scanner(System.in);
+    Library bookBag;
 
     public void run() {
 
+        Library bag = new Library();
         //Declare/Initialize variables
         int i = 0;
         int capacity = 10;
         String s = null;
 
-        //Using Scanner for Getting input from user
-        Scanner in = new Scanner(System.in);
 
-        //QUESTION: Do I keep scanning until there is a Q command? How do I do this in JAVA?
+        //Using Scanner for Getting input from user
+
+        //QUESTION: Do I keep scanning until there is a Q command? How do I do this in JAVA? -- RESOLVED
+
         while (in.hasNext()) { //CHECK if this is right.
             s = in.nextLine();//nextLine reads the line after you press enter
             //TESTING PURPOSES
@@ -22,6 +26,8 @@ public class Kiosk {
             String[] arrOfStr = s.split(",");
             for (String a: arrOfStr)
                 System.out.println(a);
+
+            String command = arrOfStr[0];
 
             /*StringTokenizer st = new StringTokenizer(s, ","); //Use StringTokenizer with comma as delimiter
             String[] tokens = new String[capacity]; //Array for storing tokens
@@ -33,26 +39,20 @@ public class Kiosk {
                 i++;
             }
 
-            /*notes from office hours:
-            //store the first line into buffer mechanism
+            /*
+            notes from office hours:
+            store the first line into buffer mechanism
             don't parse command until 2nd line is put into system
             for now assume every line is complete
             if the command line isn't complete -- output "invalid command"
             suggestion: have separate class for testcases and use in main
-
-
-            //Check if the command(s) are stored. TESTING PURPOSES.
-            System.out.print(tokens[0]);
-            System.out.print(tokens[1]);
-            System.out.print(tokens[2]);
              */
 
             //Place each command into a case and handle them from there
             i = 0; //do you mean like this?
-            switch (arrOfStr[i]) {
+            switch (command) {
                 case "A":
                     //TODO insert add(Book book) method
-                    System.out.println("added");
                     break;
                 case "R":
                     //TODO insert remove(Book book) method
@@ -74,8 +74,7 @@ public class Kiosk {
                     break;
                 case "Q":
                     //TODO fix error for this case. It does not print. NULLPOINTEREXCEPTION.
-                    System.out.println("Kiosk session ended"); //QUESTION: can we use system here?
-                    //QUESTION: How do we create the outputs without System.out.print()?
+                    System.out.println("Kiosk session ended");
                     System.exit(0);
                     break;
                 default:
@@ -86,3 +85,4 @@ public class Kiosk {
 
     }
 }
+
