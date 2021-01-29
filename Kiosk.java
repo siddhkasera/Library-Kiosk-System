@@ -29,16 +29,22 @@ public class Kiosk {
                 i++;
             }
 
-            /*
+            /*notes from office hours:
+            //store the first line into buffer mechanism
+            don't parse command until 2nd line is put into system
+            for now assume every line is complete
+            if the command line isn't complete -- output "invalid command"
+            suggestion: have separate class for testcases and use in main
+
 
             //Check if the command(s) are stored. TESTING PURPOSES.
             System.out.print(tokens[0]);
             System.out.print(tokens[1]);
             System.out.print(tokens[2]);
-
              */
 
             //Place each command into a case and handle them from there
+            i = 0; //do you mean like this?
             switch (tokens[0]) {
                 case "A":
                     //TODO insert add(Book book) method
@@ -71,8 +77,7 @@ public class Kiosk {
                 default:
                     break;
             }
-            //TESTING PURPOSES:
-            System.out.println("\n" + tokens[0]);
+            System.out.println("\n" + tokens[0]); //TESTING
         }
 
     }
