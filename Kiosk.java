@@ -19,7 +19,11 @@ public class Kiosk {
             //TESTING PURPOSES
             System.out.println("You entered string " + s);
 
-            StringTokenizer st = new StringTokenizer(s, ","); //Use StringTokenizer with comma as delimiter
+            String[] arrOfStr = s.split(",");
+            for (String a: arrOfStr)
+                System.out.println(a);
+
+            /*StringTokenizer st = new StringTokenizer(s, ","); //Use StringTokenizer with comma as delimiter
             String[] tokens = new String[capacity]; //Array for storing tokens
 
             //Place tokens from string into tokens array
@@ -45,7 +49,7 @@ public class Kiosk {
 
             //Place each command into a case and handle them from there
             i = 0; //do you mean like this?
-            switch (tokens[0]) {
+            switch (arrOfStr[i]) {
                 case "A":
                     //TODO insert add(Book book) method
                     System.out.println("added");
@@ -77,9 +81,8 @@ public class Kiosk {
                 default:
                     break;
             }
-            System.out.println("\n" + tokens[0]); //TESTING
+            System.out.println("\n" + arrOfStr[i]); //TESTING
         }
 
     }
 }
-
