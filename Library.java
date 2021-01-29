@@ -25,8 +25,13 @@ public class Library {
     private void grow() { } // helper method to grow the capacity by 4
     
     public void add(Book book) {
-       //TODO working on this now 
-
+        if ((numBooks + 1) <= books.length) {
+            books[numBooks] = book;
+        } else {
+            this.grow();
+            books[numBooks] = book;
+        }
+        numBooks++;
     }
     public boolean remove(Book book) {
         return false;
