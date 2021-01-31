@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import java.util.Calendar;
+
 public class Kiosk {
     Scanner in = new Scanner(System.in);
     Library bookBag;
@@ -10,8 +12,9 @@ public class Kiosk {
         Library bag = new Library();
         //Declare/Initialize variables
         int i = 0;
-        int capacity = 10;
+        //int capacity = 10;
         String s = null;
+        String serialNum = "";
 
 
         //Using Scanner for Getting input from user
@@ -53,6 +56,13 @@ public class Kiosk {
             switch (command) {
                 case "A":
                     //TODO insert add(Book book) method
+
+                    //QUESTION: Is this the correct way to add a new book object to pass to my library?
+                    //How do we edit the number, checkedOut values?
+
+                    Book addBook = new Book(arrOfStr[1], null, false, null);
+                    bookBag.add(addBook);
+                    System.out.println(addBook);
                     break;
                 case "R":
                     //TODO insert remove(Book book) method
