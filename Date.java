@@ -7,25 +7,46 @@ public class Date {
     private int day;
 
     public Date(String date) { //taking mm/dd/yyyy and create a Date object
-
-        this.setDate(day, month, year);
+        this.setYear(year);
+        this.setMonth(month);
+        this.setDay(day);
 
     }
 
-    public String setDate(int day, int month, int year){ //???
-        //Calendar.
-        //return a date object set a date from the input
-        //check the day, month and year.
-        return null;
+    public void setYear(int year) {
+
+        this.year = year;
     }
 
+    public void setMonth(int month) {
+
+        this.month = month;
+    }
+    public void setDay(int day) {
+
+        this.day = day;
+    }
+    public int getMonth(int month) {
+
+        return this.month;
+    }
+    public int getDay(int day) {
+
+        return this.day;
+    }
+    public int getYear(int year) {
+
+        return this.year;
+    }
     public Date () // create object with today's date (see Calendar class)
     {
         Date cal = new Date();
-        cal.setDate(day,month,year); //not sure.
+        if(isValid(day,month,year)) {
+            cal.getYear(year);
+            cal.getDay(day);
+            cal.getMonth(month);
+        }
 
-
-        //create a date object
     }
 
     public boolean isValid(int day, int month, int year)
