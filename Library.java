@@ -1,10 +1,11 @@
-
 public class Library {
     private static final int CAPACITY = 4;
     private static final int NOT_FOUND = -1;
     private Book[] books; // array-based implementation of the bag data structure private int numBooks;
     //books = new Book[CAPACITY]; //allocating memory for 4 books ...COME BACK TO THIS!!
     private int numBooks; // the number of books currently in the bag
+    public String serialNum = "10000";
+    int serialNumInt = 10000;
 
     public Library() { //default constructor to create an empty bag
         //initialize books capacity to 4
@@ -37,12 +38,8 @@ public class Library {
     }
     /*
       private void sortbyDate(Book books) {
-
-
       }
       private void sortbyNumber(Book books) {
-
-
       }
       */
     private void grow() {
@@ -51,21 +48,47 @@ public class Library {
         int newLength = oldLength + CAPACITY;
         Book[] book1 = new Book[newLength];
 
-        for(int i =0; i <newLength; i++) {
+        for(int i = 0; i <newLength; i++) {
             book1[i] = books[i];
         }
         books = book1;
     } // helper method to grow the capacity by 4
+
+
     public void add(Book book) {
 
+        //System.out.println("it went to my function");
+        //create serialnumber
 
-    }
+        if ((numBooks + 1) <= books.length) {
+            books[numBooks] = book;
+            serialNumInt++;
+            serialNum = String.valueOf(serialNumInt);
+
+            //QUESTION: how to set serial number to book? is this how it is done?
+            book.setNumber(serialNum);
+
+            System.out.println(serialNum); //TESTING PURPOSES. must delete after or will lose points
+
+        } else {
+            this.grow();
+            books[numBooks] = book;
+        }
+        numBooks++;
+
+
+        }
+
+
     //1 2 3 4 5
     //1 2   4 5
     //1 2 4 5 0
     public boolean remove(Book book) {
-        String serialNum = "10001";
+        //String serialNum = "10001";
         //1. Looking for a book in Library...
+
+        System.out.println("remove method was called");
+
         int found = find(book);
         int index = 0;
         if(found == 1) {
@@ -115,9 +138,6 @@ public class Library {
             book.setCheckedOut(false);
             //return true;
         }
-
-
-
         return false;
     }
 
@@ -126,6 +146,7 @@ public class Library {
             System.out.println(books[i].getName());
         }
     } //print the list of books in the bag
+
     public void printByDate() {
 
 

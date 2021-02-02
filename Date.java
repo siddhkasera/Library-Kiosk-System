@@ -7,46 +7,29 @@ public class Date {
     private int day;
 
     public Date(String date) { //taking mm/dd/yyyy and create a Date object
-        this.setYear(year);
-        this.setMonth(month);
-        this.setDay(day);
+
+
+        //split the string from date variable in here
+
+        //use isValid function to see if date is valid
+
+        //assigning the day, month, year -- turning the string into integer so the Date underneath can use it
 
     }
 
-    public void setYear(int year) {
 
-        this.year = year;
-    }
-
-    public void setMonth(int month) {
-
-        this.month = month;
-    }
-    public void setDay(int day) {
-
-        this.day = day;
-    }
-    public int getMonth(int month) {
-
-        return this.month;
-    }
-    public int getDay(int day) {
-
-        return this.day;
-    }
-    public int getYear(int year) {
-
-        return this.year;
-    }
     public Date () // create object with today's date (see Calendar class)
     {
         Date cal = new Date();
-        if(isValid(day,month,year)) {
-            cal.getYear(year);
-            cal.getDay(day);
-            cal.getMonth(month);
-        }
+        //use the calendar class, getInstance() will give today's information
 
+        Calendar today = Calendar.getInstance(); //gives instance of today's information
+
+        this.day = today.DAY_OF_MONTH;
+        this.month = today.MONTH;
+        this.year = today.YEAR;
+
+        //create a date object
     }
 
     public boolean isValid(int day, int month, int year)
@@ -156,4 +139,28 @@ public class Date {
 }
 
 
+
+/**
+ * recitation notes: 2/1/21
+ * the date has two constructors
+ *
+ * 1) transform the strings into integers
+ * 2) you assign an input
+ *
+ * we can use getDate() or getTime() from Calendar class
+ *
+ * String date may have a lot of invalid inputs
+ * checking constructor if it is a valid date for input
+ * you need the date for the library and book class
+ *
+ * the date object itself
+ * professor is going to test isValid() the most because that is the only one she is choosing to check for testing
+ *
+ * you can use system.out.print in the testbed
+ * instead of using system.out you can also use the boolean values
+ *
+ *StdRandom.uniform(SUITES.length)
+ *
+ *
+ */
 
