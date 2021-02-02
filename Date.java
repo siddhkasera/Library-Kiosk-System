@@ -10,17 +10,28 @@ public class Date {
 
 
         //split the string from date variable in here
+        String[] arrOfDate = date.split("/");
 
-        //use isValid function to see if date is valid
+        System.out.println(arrOfDate[0]);
+
+        //month = Integer.valueOf(arrOfDate[0]);
 
         //assigning the day, month, year -- turning the string into integer so the Date underneath can use it
+        month = Integer.valueOf(arrOfDate[0]);
+        day = Integer.valueOf(arrOfDate[1]);
+        year = Integer.valueOf(arrOfDate[2]);
 
+
+        //use isValid function to see if date is valid
+        isValid(day, month, year);
+
+        System.out.println(month + day + year);
     }
 
 
     public Date () // create object with today's date (see Calendar class)
     {
-        Date cal = new Date();
+        //Date cal = new Date();
         //use the calendar class, getInstance() will give today's information
 
         Calendar today = Calendar.getInstance(); //gives instance of today's information
@@ -29,7 +40,6 @@ public class Date {
         this.month = today.MONTH;
         this.year = today.YEAR;
 
-        //create a date object
     }
 
     public boolean isValid(int day, int month, int year)
@@ -54,9 +64,10 @@ public class Date {
             leap = false; // step5
         }
 
+        //we can use our own algo here
         switch(month) {
 
-            case 1:
+            case 1: //we have to change this 1 to JAN or something -- rn its a magic number.. any number that is reference must have a variable or else its a magic number
                 if ( day < 1 || day > 31 ) {
                     return false;
                 }
