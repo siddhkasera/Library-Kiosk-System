@@ -4,7 +4,7 @@ public class Library {
     private Book[] books; // array-based implementation of the bag data structure private int numBooks;
     //books = new Book[CAPACITY]; //allocating memory for 4 books ...COME BACK TO THIS!!
     private int numBooks; // the number of books currently in the bag
-    public String serialNum = "10000";
+    public static String serialNum = "10000";
     int serialNumInt = 10000;
 
     public Library() { //default constructor to create an empty bag
@@ -54,19 +54,17 @@ public class Library {
         books = book1;
     } // helper method to grow the capacity by 4
 
-
+//ADD and REMOVE seem to work.
     public void add(Book book) {
-
-        //System.out.println("it went to my function");
-        //create serialnumber
 
         if ((numBooks + 1) <= books.length) {
             books[numBooks] = book;
             serialNumInt++;
             serialNum = String.valueOf(serialNumInt);
 
-            //QUESTION: how to set serial number to book? is this how it is done?
+            //--RESOLVED -- QUESTION: how to set serial number to book? is this how it is done?
             book.setNumber(serialNum);
+           //book.setDate(); //QUESTION: is this where i should do it? I don't think it'll be good to do it here.
 
             System.out.println(serialNum); //TESTING PURPOSES. must delete after or will lose points
 
@@ -74,6 +72,9 @@ public class Library {
             this.grow();
             books[numBooks] = book;
         }
+
+        System.out.println(book.getName()+" added to the Library.");
+
         numBooks++;
 
 
@@ -94,7 +95,7 @@ public class Library {
         if(found == 1) {
             index = findIndex(book);
 
-            System.out.println("Book#"+ book.getNumber()+"removed.");
+            System.out.println("Book# "+ book.getNumber()+" removed.");
             books[index].setName(null);
             books[index].setNumber(null);
             books[index].setDate(null);
@@ -111,15 +112,18 @@ public class Library {
 
         return false;
     }
+
     public boolean checkOut(Book book) {
-        String serialNum = "10001";
+        //String serialNum = "10001";
         int found = find(book);
+        System.out.println("checkout method called");
+
         //1. Looking for a book in Library...
         if(found==1) {
             int index = findIndex(book);
             if(book.getNumber().equals(serialNum) && (!book.isCheckedOut())) {
                 //return true;
-                System.out.println("Book#"+ book.getNumber()+"Enjoy!.");
+                System.out.println("You've checked out Book#"+ book.getNumber()+". Enjoy!.");
                 books[index].setCheckedOut(true);
                 // removedAt = i;
             }
@@ -127,14 +131,16 @@ public class Library {
         return false;
     }
 
-
+//POSSIBLE ISSUE: this isn't returning a book back to our array I think
     public boolean returns(Book book) {
 
-        String serialNum = "10001";
+        System.out.println("return method called");
+        //the serial number isn't being found here
+
         int found = find(book);
         if(found == 1 && book.isCheckedOut()) {
 
-            System.out.println("Book#"+ book.getNumber()+"return has completed.Thanks!");
+            System.out.println("Book# "+ book.getNumber()+" return has completed.Thanks!");
             book.setCheckedOut(false);
             //return true;
         }
