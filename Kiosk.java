@@ -1,98 +1,89 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
-
-import java.util.Calendar;
 
 public class Kiosk {
-    Scanner in = new Scanner(System.in);
-    Library bookBag;
+
+    //  --- RESOLVED --  Library bookBag; //QUESTION: in order to access the methods from Library, we have to create it here right? -- this did nothing lol.
 
     public void run() {
 
+        //Create Scanner and Library constructors
+        Scanner in = new Scanner(System.in);
         Library bag = new Library();
+
         //Declare/Initialize variables
         int i = 0;
-        //int capacity = 10;
         String s = null;
-        String serialNum = "";
+        boolean hasNextLine = in.hasNext();
 
 
         //Using Scanner for Getting input from user
-
-        //QUESTION: Do I keep scanning until there is a Q command? How do I do this in JAVA? -- RESOLVED
-
-        while (in.hasNext()) { //CHECK if this is right.
+                                                    // -- RESOLVED -- QUESTION: Do I keep scanning until there is a Q command? How do I do this in JAVA?
+        while (hasNextLine) {
             s = in.nextLine();//nextLine reads the line after you press enter
-            //TESTING PURPOSES
-            System.out.println("You entered string " + s);
+            String[] arrOfStr = s.split(","); //Tokenizing the array from the Scanner
 
-            String[] arrOfStr = s.split(",");
+            /*TESTING PURPOSES -- System.out.println("You entered string " + s);
             for (String a: arrOfStr)
                 System.out.println(a);
+             */
 
             String command = arrOfStr[0];
 
-            /*StringTokenizer st = new StringTokenizer(s, ","); //Use StringTokenizer with comma as delimiter
-            String[] tokens = new String[capacity]; //Array for storing tokens
-
-            //Place tokens from string into tokens array
-            while (st.hasMoreTokens()) {
-                int count = st.countTokens();
-                tokens[i] = st.nextToken();
-                i++;
-            }
-
-            /*
-            notes from office hours:
-            store the first line into buffer mechanism
-            don't parse command until 2nd line is put into system
-            for now assume every line is complete
-            if the command line isn't complete -- output "invalid command"
-            suggestion: have separate class for testcases and use in main
-             */
-
-            //Place each command into a case and handle them from there
-            i = 0; //do you mean like this?
             switch (command) {
                 case "A":
-                    //TODO insert add(Book book) method
+                    String bookName = arrOfStr[1];
+                    Book addBook = new Book(bookName, null, false, null);
+                    bag.add(addBook);  // -- RESOLVED -- QUESTION: Am I accessing this wrong?
 
-                    //QUESTION: Is this the correct way to add a new book object to pass to my library?
-                    //How do we edit the number, checkedOut values?
+                    //-- RESOLVED -- QUESTION: Is this the correct way to add a new book object to pass to my library?
+                    //How do we edit the number? How to edit checkedOut values?
+                    //I think I am confused on using my Book class to tie this all together
+                    //Does my object addBook add itself to my array in the Library class?
 
-                    Book addBook = new Book(arrOfStr[1], null, false, null);
-                    bookBag.add(addBook);
-                    System.out.println(addBook);
+                    //System.out.println(bookObj.getName()); //TESTING PURPOSES. delete later.
                     break;
+
                 case "R":
-                    //TODO insert remove(Book book) method
+                    String serialRemove = arrOfStr[1];
+                    Book removeBook = new Book(null, serialRemove, false, null);
+                    bag.remove(removeBook);
                     break;
+
                 case "O":
-                    //TODO insert checkOut(Book book) method
+                    String serialCheckOut = arrOfStr[1];
+                    Book checkOutBook = new Book(null, serialCheckOut, false, null);
+                    bag.checkOut(checkOutBook);
                     break;
+
                 case "I":
-                    //TODO insert returns(Book book) method
+                    //QUESTION: is there a way to not have repeated code in these cases?
+                    String serialReturn = arrOfStr[1];
+                    Book returnBook = new Book(null, serialReturn, false, null);
+                    bag.returns(returnBook);
                     break;
+
                 case "PA":
-                    //TODO insert print() method
+                    bag.print();
                     break;
+
                 case "PD":
-                    //TODO insert printByDate() method
+                    bag.printByDate();
                     break;
+
                 case "PN":
-                    //TODO insert printByNumber() method
+                    bag.printByNumber();
                     break;
+
                 case "Q":
-                    //TODO fix error for this case. It does not print. NULLPOINTEREXCEPTION.
                     System.out.println("Kiosk session ended");
                     System.exit(0);
                     break;
+
                 default:
+                    System.err.println("Invalid command: " + command + " expected 'A, R, O, I, PA, PD, PN, Q'.");
                     break;
             }
-            System.out.println("\n" + arrOfStr[i]); //TESTING
         }
 
     }
 }
-
