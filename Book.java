@@ -1,3 +1,5 @@
+//this is our ADT
+
 public class Book{
     private String number;
     private String name;
@@ -38,7 +40,7 @@ public class Book{
         this.checkedOut = checkedOut;
     }
     public void setDate(Date date){
-        this.date = date;
+        this.datePublished = date;
     }
 
     //we can typecast an obj to our own class
@@ -55,7 +57,7 @@ public class Book{
 
     @Override
     public String toString(){
-        String output = "Book#" + this.number + "::" + this.name + "::"+ this.date +"::"+ this.checkedOut;
+        String output = "Book#" + this.number + "::" + this.name + "::"+ this.datePublished +"::"+ this.checkedOut;
         return output;
     }
 
