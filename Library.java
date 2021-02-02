@@ -57,6 +57,7 @@ public class Library {
 
     public void add(Book book) {
 
+        //System.out.println("it went to my function");
         //create serialnumber
 
         if ((numBooks + 1) <= books.length) {
@@ -66,11 +67,16 @@ public class Library {
 
             //QUESTION: how to set serial number to book? is this how it is done?
             book.setNumber(serialNum);
+
+            System.out.println(serialNum); //TESTING PURPOSES. must delete after or will lose points
+
         } else {
             this.grow();
             books[numBooks] = book;
         }
         numBooks++;
+
+
         }
 
 
@@ -78,8 +84,11 @@ public class Library {
     //1 2   4 5
     //1 2 4 5 0
     public boolean remove(Book book) {
-        String serialNum = "10001";
+        //String serialNum = "10001";
         //1. Looking for a book in Library...
+
+        System.out.println("remove method was called");
+
         int found = find(book);
         int index = 0;
         if(found == 1) {
@@ -129,9 +138,6 @@ public class Library {
             book.setCheckedOut(false);
             //return true;
         }
-
-
-
         return false;
     }
 
@@ -140,6 +146,7 @@ public class Library {
             System.out.println(books[i].getName());
         }
     } //print the list of books in the bag
+
     public void printByDate() {
 
 
