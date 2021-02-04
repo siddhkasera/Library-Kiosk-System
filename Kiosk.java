@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Kiosk {
@@ -33,7 +34,6 @@ public class Kiosk {
              */
 
             String command = arrOfStr[0];
-            serialNumber = arrOfStr[1];
 
             switch (command) {
                 case "A":
@@ -41,9 +41,10 @@ public class Kiosk {
                     String bookName = arrOfStr[1];
                     Book addBook = new Book(bookName, null, false, null);
 
-                    //Date addDate = new Date(arrOfStr[2]);
-                    //addBook.setDate(addDate); //QUESTION: How to use Date class here? Is this right?
-                    //System.out.print(addDate); //TESTING PURPOSES
+                    Date addDate = new Date(arrOfStr[2]); //QUESTION: Is this correct?
+                    addBook.setDate(addDate); //QUESTION: How to use Date class here? Is this right?
+
+                    System.out.print(addDate); //TESTING PURPOSES
 
                     bag.add(addBook);
                     break;
@@ -58,7 +59,7 @@ public class Kiosk {
 
 
                 case "R":
-                    //serialNumber = arrOfStr[1];
+                    serialNumber = arrOfStr[1];
                     Book removeBook = new Book(null, serialNumber, false, null);
                     bag.remove(removeBook);
                     break;
