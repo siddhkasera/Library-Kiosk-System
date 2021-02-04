@@ -12,27 +12,35 @@ public class Date {
         //split the string from date variable in here
         String[] arrOfDate = date.split("/");
 
-        System.out.println(arrOfDate[0]);
+        String monthStr = arrOfDate[0];
+        String dayStr = arrOfDate[1];
+        String yearStr = arrOfDate[2];
+
+        monthStr = monthStr.strip();
+
+        System.out.println(monthStr);
+        System.out.println(dayStr);
+        System.out.println(yearStr);
 
         //month = Integer.valueOf(arrOfDate[0]);
 
         //assigning the day, month, year -- turning the string into integer so the Date underneath can use it
-        month = Integer.valueOf(arrOfDate[0]);
-        day = Integer.valueOf(arrOfDate[1]);
-        year = Integer.valueOf(arrOfDate[2]);
-
+        //month = Integer.parseInt(arrOfDate[0]); //QUESTION: This also creates an error NumberFormatException. Why is that happening?
+        day = Integer.parseInt(arrOfDate[1]);
+        year = Integer.parseInt(arrOfDate[2]);
 
         //use isValid function to see if date is valid
         isValid(day, month, year);
 
-        System.out.println(month + day + year);
+
     }
 
 
     public Date () // create object with today's date (see Calendar class)
     {
-        //Date cal = new Date();
+
         //use the calendar class, getInstance() will give today's information
+        //Date cal = new Date(); //QUESTION: This creates a StackOverflow error when called from Kiosk. Why is that?
 
         Calendar today = Calendar.getInstance(); //gives instance of today's information
 
