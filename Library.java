@@ -1,12 +1,13 @@
 public class Library {
     private static final int CAPACITY = 4;
     private static final int NOT_FOUND = -1;
-    private static final int FOUND = 1;
     private Book[] books; // array-based implementation of the bag data structure private int numBooks;
     //books = new Book[CAPACITY]; //allocating memory for 4 books ...COME BACK TO THIS!!
     private int numBooks; // the number of books currently in the bag
     public static String serialNum = "10000";
     int serialNumInt = 10000;
+    boolean bool1 = true;
+    boolean bool2 = false;
 
     public Library() { //default constructor to create an empty bag
         //initialize books capacity to 4
@@ -14,10 +15,11 @@ public class Library {
         numBooks = 0;
     }
 
-    private int findIndex(Book book) {
+
+    private int  findIndex(Book book) {
         System.out.println("in the find index method");
         for (int i = 0; i < numBooks; i++) {
-            if (books[i].getNumber().compareTo(book.getNumber()) == 0) {
+            if (books[i].getNumber().equals(book.getNumber())){
                 return i; //1 means it was found
             }
 
@@ -25,12 +27,6 @@ public class Library {
         return NOT_FOUND;
 
     }
-    /*
-      private void sortbyDate(Book books) {
-      }
-      private void sortbyNumber(Book books) {
-      }
-      */
     private void grow() {
         //Kiosk obj = new Kiosk();
         int oldLength = books.length;
@@ -51,9 +47,12 @@ public class Library {
             books[numBooks] = book;
             serialNumInt++;
             serialNum = String.valueOf(serialNumInt);
-            book.setNumber(serialNum);
 
-            System.out.println("the serial num is:" + serialNum); //TESTING PURPOSES. must delete all system.out in this class after or will lose points
+            //--RESOLVED -- QUESTION: how to set serial number to book? is this how it is done?
+            book.setNumber(serialNum);
+            //book.setDate(); //QUESTION: is this where i should do it? I don't think it'll be good to do it here.
+
+            System.out.println("the serial num is:" + serialNum); //TESTING PURPOSES. must delete after or will lose points
 
         } else {
             this.grow();
@@ -67,78 +66,82 @@ public class Library {
         System.out.println("the length of the books is:" + books.length);
 
         numBooks++;
-        for(int i =0; i < books.length;i++){
+        for(int i =0; i<books.length;i++){
             System.out.println(books[i]);
         }
+
 
     }
     private int find(Book book) {
         System.out.println("in the find method");
-        //int flag =0;
+        int flag =0;
         // System.out.println("the removing book number is:"+ book.getNumber());
         for (int i = 0; i < numBooks; i++) {
             System.out.println("inside the for loop of find method");
             //
             //System.out.println(books[1].getNumber());
-            System.out.println("I is:"+ i);
+           /* System.out.println("I is:"+ i);
             String cmp1 = books[i].getNumber();
             System.out.println("BOOK1 IS:" + cmp1);
             String cmp2 = book.getNumber();
             System.out.println("BOOK2 IS:" + cmp2);
-
-            //QUESTION: Not sure why we keep getting NullPointerException. What is going on?
-            if (books[i].getNumber().equals(book.getNumber())){
-                System.out.println("Books found"+ books[i].getName());
-                //flag = 1;
-                return 1; //1 means it was found
+*/
+            if(books[i].equals(book)){
+                //System.out.println("Books found"+ books[i].getName());
+                flag = 1;
+                //return 1; //1 means it was found
             }
-            else {
+            else { //remove this else later!!!
                 System.out.println("book not found");
-                return 0; //0 means it wasn't found
             }
+        }
+        if(flag ==1){
+            return 1;
         }
         return 0; //false by default
 
     } // helper method to find a book in the bag
 
-    //1 2 3 4 5
-    //1 2   4 5
-    //1 2 4 5 0
+ //create helper methods for the checkOut, returns
+
+//helper method for the remove
+    public boolean removeBySerialNumber(String serialNum){
+        //find the object of the book
+        //call the remove() method below
+    }
+
+
     public boolean remove(Book book) {
 
         System.out.println("remove method was called");
 
+        //if serialNum is not found, return false for this remove
+
         int found = find(book);
-        System.out.println(found);
-
-        // System.out.println("after finding the book in remove");
         int index = 0;
-
-        if(found == FOUND) {
+        if(found == 1) {
             System.out.println("inside the if found loop in remove");
             index = findIndex(book);
 
-            if (index == NOT_FOUND) {
-                return true;
+            System.out.println("Book# "+ book.getNumber()+" removed.");
+            for(int i = index; i< books.length-1;i++) { //deleting the elements
+                books[i] = books[i + 1];
             }
-            books[index].setName(null);
-            books[index].setNumber(null);
-            books[index].setDate(null);
             numBooks--;
             return true;
         }
-
-        else {
-            Book[] book1 = new Book[books.length];
-            for (int i = index; i < books.length - 1; i++) {
-                book1[i] = books[i + 1];
-            }
-            books = book1;
-            //books[books.length] //check this.
-            //what should the last index be changed to???
-
-            return false;
+        //remove this later
+        for(int j =0; j < numBooks;j++){
+            System.out.println("the new book array is:"+ books[j].getName());
         }
+
+        return false;
+    }
+
+    public boolean checkOutBySerialNumber(String serialNum) {
+
+        //sets flag of checkout value
+
     }
 
     public boolean checkOut(Book book) {
@@ -148,15 +151,23 @@ public class Library {
 
         //1. Looking for a book in Library...
         if(found==1) {
+            System.out.println("inside after found is 1");
             int index = findIndex(book);
-            if(book.getNumber().equals(serialNum) && (!book.isCheckedOut())) {
-                //return true;
-                System.out.println("You've checked out Book#"+ book.getNumber()+". Enjoy!."); //delete this after library class is done
-                books[index].setCheckedOut(true);
-                // removedAt = i;
+            if (!book.isCheckedOut()){
+                System.out.println("inside after checked out is checked!!");
+                System.out.println("You've checked out Book#"+ book.getNumber()+". Enjoy!.");
+                book.setCheckedOut(true);
+                return true;
             }
+        }else{
+            System.out.println("Book#"+ book.getNumber()+ "not available");
         }
         return false;
+    }
+
+
+    public boolean returnBySerialNumber(String serialNum){
+        //the boolean value changes but it is similar to checkOut
     }
 
     //POSSIBLE ISSUE: this isn't returning a book back to our array I think
@@ -166,16 +177,21 @@ public class Library {
         //the serial number isn't being found here
 
         int found = find(book);
-        if(found == 1 && book.isCheckedOut()) {
-            System.out.println("Book# "+ book.getNumber()+" return has completed. Thanks!");
+
+        if(found==1 && book.isCheckedOut()) {
+
+            System.out.println("Book# "+ book.getNumber()+" return has completed.Thanks!");
             book.setCheckedOut(false);
             //return true;
         }
-        return true;
+        return false;
     }
 
     public void print() {
-        for(int i =0; i<books.length; i++) {
+        if(numBooks == 0){
+            System.out.println("Library catalog is empty!");
+        }
+        for(int i =0; i<numBooks; i++) {
             System.out.println(books[i].getName());
         }
     } //print the list of books in the bag
@@ -184,9 +200,18 @@ public class Library {
 
 
     } //print the list of books by datePublished (ascending)
-    public void printByNumber() {
-
-    } //print the list of books by number (ascending)
-
+    /*
+    public void printByNumber() { //print the list of books by number (ascending)
+        if(numBooks == 0){
+            System.out.println("Library catalog is empty!");
+        }
+        for (int i = 0; i < numBooks; i++) {
+            if (Integer.parseInt(books[i].getNumber()) > Integer.parseInt(books[i + 1].getNumber())){
+                books[i] = books[i + 1];
+                System.out.println(books[i].getName());
+            }
+        }
+    }
+    */
 
 }
