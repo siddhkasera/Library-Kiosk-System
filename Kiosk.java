@@ -41,12 +41,24 @@ public class Kiosk {
 
                     break;
 
+                    /*  Office hours notes:
+                        two books shouldn't have same serial number
+                        look up the serial number in the library in the case
+
+                        write helper method to look up book to be removed
+                        will return the book object in the array that will be removed
+                        ^^ can do this from looking up the serial number
+
+                     */
 
                 case "R":
                     serialNumber = arrOfStr[1];
-                    Book removeBook = new Book(serialNumber);
-                    if(bag.remove(removeBook)){
-                        System.out.println("Book#" + removeBook.getNumber() + " removed.");
+                    //Book removeBook = new Book(serialNumber);
+
+                    //check if removeBook is null
+
+                    if(bag.removeBySerialNumber(serialNumber)){
+                        System.out.println("Book#" + serialNumber + " removed.");
                         }
                     else {
                         System.out.println(" Unable to remove, the library does not have this book.");
@@ -55,8 +67,8 @@ public class Kiosk {
 
                 case "O":
                     serialNumber = arrOfStr[1];
-                    Book checkOutBook = new Book(serialNumber);
-                    if(checkOutBook.isCheckedOut()){
+                    //Book checkOutBook = new Book(serialNumber);
+                    if(bag.checkOutBySerialNumber(serialNumber)){
                         System.out.println("Book#" + checkOutBook.getNumber() + "is not available.");
                     }
                     else {
@@ -87,10 +99,12 @@ public class Kiosk {
                     bag.printByDate();
                     break;
 
-                case "PN":
+               /* case "PN":
                     bag.printByNumber();
                     break;
 
+
+                */
                 case "Q":
                     System.out.println("Kiosk session ended");
                     System.exit(0);
