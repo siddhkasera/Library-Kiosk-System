@@ -1,6 +1,7 @@
 public class Library {
     private static final int CAPACITY = 4;
     private static final int NOT_FOUND = -1;
+    private static final int FOUND = 1;
     private Book[] books; // array-based implementation of the bag data structure private int numBooks;
     //books = new Book[CAPACITY]; //allocating memory for 4 books ...COME BACK TO THIS!!
     private int numBooks; // the number of books currently in the bag
@@ -50,12 +51,9 @@ public class Library {
             books[numBooks] = book;
             serialNumInt++;
             serialNum = String.valueOf(serialNumInt);
-
-            //--RESOLVED -- QUESTION: how to set serial number to book? is this how it is done?
             book.setNumber(serialNum);
-            //book.setDate(); //QUESTION: is this where i should do it? I don't think it'll be good to do it here.
 
-            System.out.println("the serial num is:" + serialNum); //TESTING PURPOSES. must delete after or will lose points
+            System.out.println("the serial num is:" + serialNum); //TESTING PURPOSES. must delete all system.out in this class after or will lose points
 
         } else {
             this.grow();
@@ -76,7 +74,7 @@ public class Library {
     }
     private int find(Book book) {
         System.out.println("in the find method");
-        int flag =0;
+        //int flag =0;
         // System.out.println("the removing book number is:"+ book.getNumber());
         for (int i = 0; i < numBooks; i++) {
             System.out.println("inside the for loop of find method");
@@ -88,18 +86,16 @@ public class Library {
             String cmp2 = book.getNumber();
             System.out.println("BOOK2 IS:" + cmp2);
 
-            if ((books[i].getNumber()).equals(book.getNumber())){
+            //QUESTION: Not sure why we keep getting NullPointerException. What is going on?
+            if (books[i].getNumber().equals(book.getNumber())){
                 System.out.println("Books found"+ books[i].getName());
-                flag = 1;
-                //return 1; //1 means it was found
+                //flag = 1;
+                return 1; //1 means it was found
             }
             else {
                 System.out.println("book not found");
-                //return 0; //0 means it wasn't found
+                return 0; //0 means it wasn't found
             }
-        }
-        if(flag ==1){
-            return 1;
         }
         return 0; //false by default
 
@@ -109,19 +105,22 @@ public class Library {
     //1 2   4 5
     //1 2 4 5 0
     public boolean remove(Book book) {
-        //String serialNum = "10001";
-        //1. Looking for a book in Library...
 
         System.out.println("remove method was called");
 
         int found = find(book);
+        System.out.println(found);
+
         // System.out.println("after finding the book in remove");
         int index = 0;
-        if(found == 1) {
+
+        if(found == FOUND) {
             System.out.println("inside the if found loop in remove");
             index = findIndex(book);
 
-            System.out.println("Book# "+ book.getNumber()+" removed.");
+            if (index == NOT_FOUND) {
+                return true;
+            }
             books[index].setName(null);
             books[index].setNumber(null);
             books[index].setDate(null);
@@ -129,15 +128,17 @@ public class Library {
             return true;
         }
 
-        Book [] book1 = new Book[books.length];
-        for(int i = index; i < books.length-1; i++) {
-            book1[i] = books[i + 1];
-        }
-        books = book1;
-        //books[books.length] //check this.
-        //what should the last index be changed to???
+        else {
+            Book[] book1 = new Book[books.length];
+            for (int i = index; i < books.length - 1; i++) {
+                book1[i] = books[i + 1];
+            }
+            books = book1;
+            //books[books.length] //check this.
+            //what should the last index be changed to???
 
-        return false;
+            return false;
+        }
     }
 
     public boolean checkOut(Book book) {
@@ -150,12 +151,9 @@ public class Library {
             int index = findIndex(book);
             if(book.getNumber().equals(serialNum) && (!book.isCheckedOut())) {
                 //return true;
-                System.out.println("You've checked out Book#"+ book.getNumber()+". Enjoy!.");
+                System.out.println("You've checked out Book#"+ book.getNumber()+". Enjoy!."); //delete this after library class is done
                 books[index].setCheckedOut(true);
                 // removedAt = i;
-            }
-            else {
-                //we have to add the system.out.print for if the book is not available
             }
         }
         return false;
@@ -169,12 +167,11 @@ public class Library {
 
         int found = find(book);
         if(found == 1 && book.isCheckedOut()) {
-
-            System.out.println("Book# "+ book.getNumber()+" return has completed.Thanks!");
+            System.out.println("Book# "+ book.getNumber()+" return has completed. Thanks!");
             book.setCheckedOut(false);
             //return true;
         }
-        return false;
+        return true;
     }
 
     public void print() {
@@ -187,7 +184,9 @@ public class Library {
 
 
     } //print the list of books by datePublished (ascending)
-    public void printByNumber() { } //print the list of books by number (ascending)
+    public void printByNumber() {
+
+    } //print the list of books by number (ascending)
 
 
 }
