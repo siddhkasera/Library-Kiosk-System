@@ -14,6 +14,20 @@ public class Book{
         this.setDate(datePublished);
     }
 
+    public Book(String name, String date) {
+        this.name = name;
+        checkedOut = false;
+        datePublished = new Date(date);
+    }
+
+    public Book(String serial){
+        number=serial;
+        name = null;
+        checkedOut = false;
+        datePublished = null;
+    }
+
+
     public String getName(){
         return this.name;
 
@@ -27,6 +41,8 @@ public class Book{
     }
 
     public Date getDate(){
+
+
         return this.datePublished;
     }
 
@@ -46,18 +62,37 @@ public class Book{
     //we can typecast an obj to our own class
     //use equals method
     @Override
-    public boolean equals(Object obj){
-        if(obj instanceof Book){
+    public boolean equals(Object obj) {
+        if (obj instanceof Book) {
             Book book = (Book) obj;
             return this.number.equals(book.number);
+
+            //use the formatting in the notes. on canvas. click modules. under week #2 2.1 additional notes for project 1.-- use that
+            //scroll to the bottom and write the equals method in that way.
         }
         return false;
     }
 
     @Override
     public String toString(){
-        String output = "Book#" + this.number + "::" + this.name + "::"+ this.datePublished +"::"+ this.checkedOut;
-        return output;
+
+        if (isCheckedOut()) {
+            String number = this.number;
+            String name = this.name;
+            String month = String.valueOf(datePublished.getMonth());
+            String day = String.valueOf(datePublished.getDay());
+            String year= String.valueOf(datePublished.getYear());
+
+
+            return "Book#" + number + "::" + name + "::"+ month+"/"+ day
+                    +"/"+ year +"::"+ "is checked out.";
+
+        }
+        else {
+            return "Book#" + this.number + "::" + this.name + "::"+ String.valueOf(datePublished.getMonth())+"/"+String.valueOf(datePublished.getDay())
+                    +"/"+ String.valueOf(datePublished.getYear()) +"::"+ "is available.";
+        }
+
     }
 
 }
