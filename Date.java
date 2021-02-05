@@ -1,3 +1,4 @@
+import java.time.Month;
 import java.util.Calendar;
 //mentions that we cannot add other data members..does that mean we cannot add
 // the parameters in the isValid function?? stupid question
@@ -18,30 +19,34 @@ public class Date {
 
         monthStr = monthStr.strip();
 
+        /* TESTING PURPOSES:
         System.out.println(monthStr);
         System.out.println(dayStr);
         System.out.println(yearStr);
-
-        //month = Integer.valueOf(arrOfDate[0]);
+        */
 
         //assigning the day, month, year -- turning the string into integer so the Date underneath can use it
-        //month = Integer.parseInt(arrOfDate[0]); //QUESTION: This also creates an error NumberFormatException. Why is that happening?
+        month = Integer.parseInt(monthStr); //--RESOLVED -- QUESTION: This also creates an error NumberFormatException. Why is that happening?
         day = Integer.parseInt(arrOfDate[1]);
         year = Integer.parseInt(arrOfDate[2]);
 
-        //use isValid function to see if date is valid
-        isValid(day, month, year);
+        //TESTING PURPOSES:
+        System.out.println(month);
+        System.out.println(day);
+        System.out.println(year);
 
+        this.month = month;
+        this.day = day;
+        this.year = year;
+
+        //use isValid function to see if date is valid
+        //isValid(day, month, year);
 
     }
 
-
     public Date () // create object with today's date (see Calendar class)
     {
-
         //use the calendar class, getInstance() will give today's information
-        //Date cal = new Date(); //QUESTION: This creates a StackOverflow error when called from Kiosk. Why is that?
-
         Calendar today = Calendar.getInstance(); //gives instance of today's information
 
         this.day = today.DAY_OF_MONTH;
@@ -50,7 +55,19 @@ public class Date {
 
     }
 
-    public boolean isValid(int day, int month, int year)
+    public int getDay() {
+        return day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public boolean isValid() //check this
     {  //check whether the date is valid or not.
         //check the months(no of days) leap year etc
         boolean leap = false;
