@@ -13,8 +13,7 @@ public class Library {
         numBooks = 0;
     }
 
-
-    private int  findIndex(Book book) {
+    private int findIndex(Book book) {
         System.out.println("in the find index method");
         for (int i = 0; i < numBooks; i++) {
             if (books[i].getNumber().compareTo(book.getNumber()) == 0) {
@@ -70,10 +69,9 @@ public class Library {
         System.out.println("the length of the books is:" + books.length);
 
         numBooks++;
-        for(int i =0; i<books.length;i++){
+        for(int i =0; i < books.length;i++){
             System.out.println(books[i]);
         }
-
 
     }
     private int find(Book book) {
@@ -155,6 +153,9 @@ public class Library {
                 System.out.println("You've checked out Book#"+ book.getNumber()+". Enjoy!.");
                 books[index].setCheckedOut(true);
                 // removedAt = i;
+            }
+            else {
+                //we have to add the system.out.print for if the book is not available
             }
         }
         return false;
