@@ -1,3 +1,5 @@
+//this is our ADT
+
 public class Book{
     private String number;
     private String name;
@@ -38,24 +40,23 @@ public class Book{
         this.checkedOut = checkedOut;
     }
     public void setDate(Date date){
-        this.date = date;
+        this.datePublished = date;
     }
 
     //we can typecast an obj to our own class
     //use equals method
     @Override
     public boolean equals(Object obj){
-        if(this.number.equals(((Book) obj).number)){
-            return true;
+        if(obj instanceof Book){
+            Book book = (Book) obj;
+            return this.number.equals(book.number);
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     @Override
     public String toString(){
-        String output = "Book#" + this.number + "::" + this.name + "::"+ this.date +"::"+ this.checkedOut;
+        String output = "Book#" + this.number + "::" + this.name + "::"+ this.datePublished +"::"+ this.checkedOut;
         return output;
     }
 
