@@ -9,39 +9,27 @@ public class Date {
 
     public Date(String date) { //taking mm/dd/yyyy and create a Date object
 
-
-        //split the string from date variable in here
+        //Split the string from date variable in here
         String[] arrOfDate = date.split("/");
 
+        //Assigning array of date to the first number(s) in 'mm' for 'mm/dd/yyyy' & Stripping the monthStr from any spaces so parseInt works.
         String monthStr = arrOfDate[0];
-        String dayStr = arrOfDate[1];
-        String yearStr = arrOfDate[2];
-
         monthStr = monthStr.strip();
 
-        /* TESTING PURPOSES:
-        System.out.println(monthStr);
-        System.out.println(dayStr);
-        System.out.println(yearStr);
-        */
-
-        //assigning the day, month, year -- turning the string into integer so the Date underneath can use it
-        month = Integer.parseInt(monthStr); //--RESOLVED -- QUESTION: This also creates an error NumberFormatException. Why is that happening?
+        //Assigning the day, month, year -- turning the string into integer so the Date underneath can use it
+        month = Integer.parseInt(monthStr);
         day = Integer.parseInt(arrOfDate[1]);
         year = Integer.parseInt(arrOfDate[2]);
-
-        //TESTING PURPOSES:
-        System.out.println(month);
-        System.out.println(day);
-        System.out.println(year);
 
         this.month = month;
         this.day = day;
         this.year = year;
 
-        //use isValid function to see if date is valid
-        //isValid(day, month, year);
-
+        /*TESTING PURPOSES:
+        System.out.println(month);
+        System.out.println(day);
+        System.out.println(year);
+         */
     }
 
     public Date () // create object with today's date (see Calendar class)
@@ -67,10 +55,11 @@ public class Date {
         return year;
     }
 
-    public boolean isValid() //check this
-    {  //check whether the date is valid or not.
-        //check the months(no of days) leap year etc
+    public boolean isValid()
+    //TODO CHECK THIS METHOD for functionality
+    {
         boolean leap = false;
+        int monthIncrement = 1;
         if(year < 1900 || year > 2021) {
             return false;
         }
@@ -89,15 +78,16 @@ public class Date {
             leap = false; // step5
         }
 
+
         //we can use our own algo here
         switch(month) {
 
-            case 1: //we have to change this 1 to JAN or something -- rn its a magic number.. any number that is reference must have a variable or else its a magic number
+            case Calendar.JANUARY+1:
                 if ( day < 1 || day > 31 ) {
                     return false;
                 }
                 break;
-            case 2:
+            case Calendar.FEBRUARY+1:
                 if(leap) {
                     if(day <1 || day > 29) {
                         return false;
@@ -107,58 +97,59 @@ public class Date {
                 }
 
                 break;
-            case 3:
+            case Calendar.MARCH+1:
                 if(day <1 || day > 31) {
                     return false;
                 }
                 break;
-            case 4:
+            case Calendar.APRIL+1:
                 if(day <1 || day > 30) {
                     return false;
                 }
                 break;
 
-            case 5:
+            case Calendar.MAY+1:
                 if(day <1 || day > 31) {
                     return false;
                 }
                 break;
 
-            case 6:
+            case Calendar.JUNE+1:
                 if(day <1 || day > 30) {
                     return false;
                 }
                 break;
 
-            case 7:
+            case Calendar.JULY+1:
                 if(day <1 || day > 31) {
                     return false;
                 }
                 break;
 
-            case 8:
+            case Calendar.AUGUST+1:
                 if(day <1 || day > 31) {
                     return false;
                 }
                 break;
 
-            case 9:
+            case Calendar.SEPTEMBER+1:
                 if(day <1 || day > 30) {
                     return false;
                 }
                 break;
 
-            case 10:
+            case Calendar.OCTOBER+1:
                 if(day <1 || day > 31) {
                     return false;
                 }
                 break;
-            case 11:
+
+            case Calendar.NOVEMBER+1:
                 if(day <1 || day > 30) {
                     return false;
                 }
                 break;
-            case 12:
+            case Calendar.DECEMBER+1:
                 if(day <1 || day > 31) {
                     return false;
                 }
