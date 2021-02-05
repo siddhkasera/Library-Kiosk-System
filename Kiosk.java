@@ -15,12 +15,9 @@ public class Kiosk {
         Date date = new Date();
 
         //Declare/Initialize variables
-
         int i = 0;
         String s = null;
         boolean hasNextLine = in.hasNext();
-
-
 
         //Using Scanner for Getting input from user
                                                             // -- RESOLVED -- QUESTION: Do I keep scanning until there is a Q command? How do I do this in JAVA?
@@ -39,14 +36,12 @@ public class Kiosk {
                 case "A":
 
                     String bookName = arrOfStr[1];
-                    Book addBook = new Book(bookName, null, false, null);
-
-                    Date addDate = new Date(arrOfStr[2]); //QUESTION: Is this correct?
-                    addBook.setDate(addDate); //QUESTION: How to use Date class here? Is this right?
-
-                    System.out.print(addDate); //TESTING PURPOSES
-
-                    bag.add(addBook);
+                    String datePubStr = arrOfStr[2];
+                    Book addBook = new Book(bookName, datePubStr);
+                    //addBook.setDate(addDate); //QUESTION: How to use Date class here? Is this right?
+                    //if (addBook.getDate().isValid()) {
+                        bag.add(addBook);
+                  //  }
                     break;
 
                     // -- RESOLVED -- QUESTION: Am I accessing this wrong?
@@ -56,7 +51,6 @@ public class Kiosk {
                     //Does my object addBook add itself to my array in the Library class?
 
                     //System.out.println(bookObj.getName()); //TESTING PURPOSES. delete later.
-
 
                 case "R":
                     serialNumber = arrOfStr[1];
