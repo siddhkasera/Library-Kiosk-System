@@ -14,6 +14,14 @@ public class Book{
         this.setDate(datePublished);
     }
 
+    public Book(String name, String date) {
+        this.name = name;
+        checkedOut = false;
+        datePublished = new Date(date);
+    }
+
+
+
     public String getName(){
         return this.name;
 
@@ -27,6 +35,8 @@ public class Book{
     }
 
     public Date getDate(){
+
+
         return this.datePublished;
     }
 
@@ -47,8 +57,12 @@ public class Book{
     //use equals method
     @Override
     public boolean equals(Object obj){
-        if(this.number.equals(((Book) obj).number)){
-            return true;
+        if(obj instanceof Book){
+            Book book = (Book) obj;
+            return book.number.equals(this.number);
+
+            //use the formatting in the notes. on canvas. click modules. under week #2 2.1 additional notes for project 1.-- use that
+            //scroll to the bottom and write the equals method in that way.
         }
         else {
             return false;
@@ -57,8 +71,14 @@ public class Book{
 
     @Override
     public String toString(){
-        String output = "Book#" + this.number + "::" + this.name + "::"+ this.datePublished +"::"+ this.checkedOut;
-        return output;
+
+        //if (isCheckedOut()) {
+            return "Book#" + this.number + "::" + this.name + "::"+ String.valueOf(datePublished.getMonth())+"/"+String.valueOf(datePublished.getDay())
+                    +"/"+ String.valueOf(datePublished.getYear()) +"::"+ this.checkedOut;
+
+      //}
+       // String output = "Book#" + this.number + "::" + this.name + "::"+ this.datePublished +"::"+ this.checkedOut;
+      //  return output;
     }
 
 }
