@@ -34,7 +34,7 @@ public class Kiosk {
 
                     //if (addBook.getDate().isValid()) { //--UNCOMMENT THIS TO CHECK IF VALID WORKS AND IF IT DOES, LEAVE UNCOMMENTED
                         bag.add(addBook);
-                        //System.out.println(book.getName() + " added to the Library."); //--UNCOMMENT THIS ONCE LIBRARY IS DONE
+                        System.out.println(addBook.getName() + " added to the Library."); //--UNCOMMENT THIS ONCE LIBRARY IS DONE
                     /*  }
                     else {
                         System.out.println("Invalid Date!");
@@ -43,19 +43,10 @@ public class Kiosk {
 
                     break;
 
-                    /*  Office hours notes:
-                        two books shouldn't have same serial number
-                        look up the serial number in the library in the case
-
-                        write helper method to look up book to be removed
-                        will return the book object in the array that will be removed
-                        ^^ can do this from looking up the serial number
-                     */
-
                 case "R":
                     serialNumber = arrOfStr[1];
-                    Book book = new Book(serialNumber);
-                    if(bag.remove(book)){
+                    Book removeBook = new Book(serialNumber);
+                    if(bag.remove(removeBook)){
 
                         System.out.println("Book#" + serialNumber + " removed.");
                         }
@@ -67,14 +58,14 @@ public class Kiosk {
 
                 case "O":
                     serialNumber = arrOfStr[1];
-                    Book book1 = new Book(serialNumber);
+                    Book checkOutBook = new Book(serialNumber);
 
-                    if(bag.checkOut(book1)){
+                    if(bag.checkOut(checkOutBook)){
                         //book1.setCheckedOut(true);
                         System.out.println("Book#" + serialNumber + " is not available.");
                     }
                     else {
-                        book1.setCheckedOut(true);
+                        checkOutBook.setCheckedOut(true);
                         //bag.checkOut(book1);
                         System.out.println("You've checked out Book#"+ serialNumber + ". Enjoy!.");
                     }
@@ -82,8 +73,8 @@ public class Kiosk {
 
                 case "I":
                     serialNumber = arrOfStr[1];
-                    Book book2 = new Book(serialNumber);
-                    if(bag.returns(book2)){
+                    Book returnBook = new Book(serialNumber);
+                    if(bag.returns(returnBook)){
                         System.out.println("Unable to return Book#" + serialNumber);
                     }
                     else {
@@ -116,29 +107,3 @@ public class Kiosk {
 
     }
 }
-
-
-            /* Notes: StringTokenizer st = new StringTokenizer(s, ","); //Use StringTokenizer with comma as delimiter
-
-            String[] tokens = new String[capacity]; //Array for storing tokens
-
-            //Place tokens from string into tokens array
-            while (st.hasMoreTokens()) {
-                int count = st.countTokens();
-                tokens[i] = st.nextToken();
-                i++;
-            }
-
-            /*
-            notes from office hours 1/29/21:
-            store the first line into buffer mechanism
-            don't parse command until 2nd line is put into system
-            for now assume every line is complete
-            if the command line isn't complete -- output "invalid command"
-            suggestion: have separate class for testcases and use in main
-
-
-//Place each command into a case and handle them from there
-//i = 0; //do you mean like this?
-
-*/
