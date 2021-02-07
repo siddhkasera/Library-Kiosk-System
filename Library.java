@@ -96,7 +96,7 @@ public class Library {
 
     public boolean remove(Book book) {
 
-        System.out.println("remove method was called");
+        //System.out.println("remove method was called");
         //if serialNum is not found, return false for this remove
         int found = find(book);
         int index = 0;
@@ -138,15 +138,15 @@ public class Library {
 
         //1. Looking for a book in Library...
         if(found==1) {
-            System.out.println("inside after found is 1");
-            System.out.println(books[index]);
+            //System.out.println("inside after found is 1");
+            //System.out.println(books[index]);
             if (books[index].isCheckedOut()){
                 return true;
             }
         }
             try {
                 books[index].setCheckedOut(true); //this is not running
-                System.out.print(books[index].isCheckedOut());
+                //System.out.print(books[index].isCheckedOut());
                 return false;
             }
             catch (ArrayIndexOutOfBoundsException e) { //if the serial number they inputted doesn't exist in our library anymore, this is thrown
@@ -173,17 +173,18 @@ public class Library {
     }
 
     public void print() {
+        System.out.println("**List of books in library.");
         if(numBooks == 0){
             System.out.println("Library catalog is empty!");
         }
         for(int i =0; i<numBooks; i++) {
-           // books[1].setCheckedOut(true); this prints the checkedOut toString
             System.out.println(books[i]);
         }
+        System.out.println("**End of list.");
     } //print the list of books in the bag
 
     public void printByDate() {
-
+        System.out.println("**List of books by the date published.");
         int month = datePublished.getMonth();
         int day = datePublished.getDay();
         int year = datePublished.getYear();
@@ -195,24 +196,25 @@ public class Library {
             for(int i =0; i<numBooks; i++) {
                 System.out.println(books[i]);
             }
-
-
+        System.out.println("**End of list.");
         }
 
 
-    }
     //print the list of books by datePublished (ascending)
-    /*
+
     public void printByNumber() { //print the list of books by number (ascending)
+        System.out.println("**List of books by the book numbers.");
         if(numBooks == 0){
             System.out.println("Library catalog is empty!");
         }
         for (int i = 0; i < numBooks; i++) {
             if (Integer.parseInt(books[i].getNumber()) > Integer.parseInt(books[i + 1].getNumber())){
                 books[i] = books[i + 1];
-                System.out.println(books[i].getName());
+                System.out.println(books[i]);
             }
         }
+        System.out.println("**End of list.");
     }
-    */
+}
+
 
