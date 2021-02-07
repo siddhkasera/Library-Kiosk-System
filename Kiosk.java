@@ -99,10 +99,10 @@ public class Kiosk {
                     bag.printByDate();
                     break;
 
-                /*case "PN":
+                case "PN":
                     bag.printByNumber();
                     break;
-                */
+
                 case "Q":
                     System.out.println("Kiosk session ended");
                     System.exit(0);
