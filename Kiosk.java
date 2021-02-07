@@ -4,12 +4,14 @@ import java.util.Scanner;
 public class Kiosk {
     public static String serialNumber;
 
+
     public void run() {
 
         //Create Scanner and Library constructors
         Scanner in = new Scanner(System.in);
         Library bag = new Library();
         Date date = new Date();
+
 
         //Declare/Initialize variables
         String command = "";
@@ -48,47 +50,45 @@ public class Kiosk {
                         write helper method to look up book to be removed
                         will return the book object in the array that will be removed
                         ^^ can do this from looking up the serial number
-
                      */
 
                 case "R":
                     serialNumber = arrOfStr[1];
-                    //Book removeBook = new Book(serialNumber);
+                    Book book = new Book(serialNumber);
+                    if(bag.remove(book)){
 
-                    //check if removeBook is null
-
-                    if(bag.removeBySerialNumber(serialNumber)){
                         System.out.println("Book#" + serialNumber + " removed.");
                         }
                     else {
-                        System.out.println(" Unable to remove, the library does not have this book.");
+                        System.out.println("Unable to remove, the library does not have this book.");
                     }
                     break;
 
+
                 case "O":
                     serialNumber = arrOfStr[1];
-                    //Book checkOutBook = new Book(serialNumber);
-                    if(bag.checkOutBySerialNumber(serialNumber)){
-                        System.out.println("Book#" + checkOutBook.getNumber() + "is not available.");
+                    Book book1 = new Book(serialNumber);
+
+                    if(bag.checkOut(book1)){
+                        //book1.setCheckedOut(true);
+                        System.out.println("Book#" + serialNumber + " is not available.");
                     }
                     else {
-                        bag.checkOut(checkOutBook);
-                        System.out.println("You've checked out Book#"+ checkOutBook.getNumber()+ ". Enjoy!.");
+                        book1.setCheckedOut(true);
+                        //bag.checkOut(book1);
+                        System.out.println("You've checked out Book#"+ serialNumber + ". Enjoy!.");
                     }
                     break;
 
                 case "I":
-                    //QUESTION: is there a way to not have repeated code in these cases?
                     serialNumber = arrOfStr[1];
-                    Book returnBook = new Book(serialNumber);
-
-                    if(bag.returns(returnBook)){ //QUESTION: How to handle if the book doesn’t belong to the library? How do we check if it isn't in the library form here
-                        System.out.println("Unable to return Book#" + returnBook.getNumber());
+                    Book book2 = new Book(serialNumber);
+                    if(bag.returns(book2)){
+                        System.out.println("Unable to return Book#" + serialNumber);
                     }
                     else {
-                        System.out.println("Book#" + returnBook.getNumber() + " return has completed. Thanks!");
+                        System.out.println("Book#" + serialNumber + " return has completed. Thanks!");
                     }
-
                     break;
 
                 case "PA":
@@ -99,11 +99,9 @@ public class Kiosk {
                     bag.printByDate();
                     break;
 
-               /* case "PN":
+                /*case "PN":
                     bag.printByNumber();
                     break;
-
-
                 */
                 case "Q":
                     System.out.println("Kiosk session ended");
