@@ -5,14 +5,14 @@ public class Library {
     //books = new Book[CAPACITY]; //allocating memory for 4 books ...COME BACK TO THIS!!
     private int numBooks; // the number of books currently in the bag
     public static String serialNum = "10000";
-    int serialNumInt = 10000;
-    boolean checkedOut = false;
+    public static int serialNumInt = 10000;
     private Date datePublished;
 
 
     public Library() { //default constructor to create an empty bag
         //initialize books capacity to 4
         books = new Book[CAPACITY];
+        datePublished = new Date();
         numBooks = 0;
     }
 
@@ -117,35 +117,21 @@ public class Library {
         return false;
     }
 
-    public boolean isCheckedIn(int find) {
-        if (find == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 
-    public boolean isCheckedOut() {
-        return true;
-    }
 
     public boolean checkOut(Book book) {
         int found = find(book);
         int index = findIndex(book);
 
         System.out.println("checkout method called");
-
         //1. Looking for a book in Library...
         if(found==1) {
-            //System.out.println("inside after found is 1");
-            //System.out.println(books[index]);
             if (books[index].isCheckedOut()){
                 return true;
             }
         }
             try {
-                books[index].setCheckedOut(true); //this is not running
+                books[index].setCheckedOut(true);
                 //System.out.print(books[index].isCheckedOut());
                 return false;
             }
@@ -189,11 +175,13 @@ public class Library {
         int day = datePublished.getDay();
         int year = datePublished.getYear();
 
+        String date = String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year);
 
             if(numBooks == 0){
                 System.out.println("Library catalog is empty!");
             }
             for(int i =0; i<numBooks; i++) {
+                //
                 System.out.println(books[i]);
             }
         System.out.println("**End of list.");
