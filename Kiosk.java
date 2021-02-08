@@ -7,17 +7,20 @@ public class Kiosk {
 
     public void run() {
 
+        System.out.println("Library Kiosk running.");
+
         //Create Scanner and Library constructors
         Scanner in = new Scanner(System.in);
         Library bag = new Library();
-        Date date = new Date();
-
+        Date datePub = new Date();
 
         //Declare/Initialize variables
         String command = "";
         int i = 0;
         String s = null;
         boolean hasNextLine = in.hasNext();
+
+
 
         //Using Scanner for Getting input from user
         while (hasNextLine) {
@@ -61,12 +64,10 @@ public class Kiosk {
                     Book checkOutBook = new Book(serialNumber);
 
                     if(bag.checkOut(checkOutBook)){
-                        //book1.setCheckedOut(true);
                         System.out.println("Book#" + serialNumber + " is not available.");
                     }
                     else {
                         checkOutBook.setCheckedOut(true);
-                        //bag.checkOut(book1);
                         System.out.println("You've checked out Book#"+ serialNumber + ". Enjoy!.");
                     }
                     break;
