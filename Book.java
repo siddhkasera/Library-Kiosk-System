@@ -11,10 +11,10 @@ public class Book{
 
     /**
      *  A four parameter Book constructor that initializes an Book object when it is created.
-     * @param name
-     * @param number
-     * @param checkedOut
-     * @param datePublished
+     * @param name attribute for a book object
+     * @param number attribute for a book object
+     * @param checkedOut attribute for a book object
+     * @param datePublished attribute for a book object
      */
     public Book(String name, String number, boolean checkedOut, Date datePublished){
         this.setName(name);
@@ -24,8 +24,8 @@ public class Book{
     }
 
     /** A two parameter constructor that initializes an Book object.
-     * @param name
-     * @param date
+     * @param name attribute for a book object
+     * @param date attribute for a book object
      */
     public Book(String name, String date) {
         this.name = name;
@@ -35,7 +35,7 @@ public class Book{
 
     /**
      * A one parameter constructor that intializes an Book object.
-     * @param serial
+     * @param serial number attribute for a book object
      */
     public Book(String serial){
         number=serial;
@@ -45,7 +45,7 @@ public class Book{
     }
     /**
      * Returns the name instance variable
-     * @return name
+     * @return name attribute for a Book object
      */
     public String getName(){
         return this.name;
@@ -53,49 +53,49 @@ public class Book{
     }
     /**
      * Returns the number instance variable
-     * @return number
+     * @return number attribute of a Book object
      */
     public String getNumber(){
         return this.number;
     }
     /**
      * Returns the checkedOut instance variable
-     * @return checkedOut
+     * @return checkedOut attribute of Book object
      */
     public boolean isCheckedOut(){
         return this.checkedOut;
     }
     /**
      * Returns the datePublished instance variable
-     *@return datePublishes
+     *@return datePublished  attribute of Book object
      */
     public Date getDate(){
         return this.datePublished;
     }
     /**
      * Sets the name instance variable
-     * @param name
+     * @param name attribute is set for a given object
      */
     public void setName(String name){
         this.name = name;
     }
     /**
      * Sets the number instance variable
-     * @param number
+     * @param number attribute is set for a given book object
      */
     public void setNumber(String number){
         this.number = number;
     }
     /**
      * Sets the checkedOut instance variable
-     * @param checkedOut
+     * @param checkedOut attricute is set for a given book object
      */
     public void setCheckedOut(boolean checkedOut){
         this.checkedOut = checkedOut;
     }
     /**
      * Sets the date instance variable
-     * @param date
+     * @param  date attribute is set for a given book object
      */
     public void setDate(Date date){
         this.datePublished = date;

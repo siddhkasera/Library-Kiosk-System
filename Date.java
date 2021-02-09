@@ -2,7 +2,7 @@
  This class defines the abstract data type Date which encapsulates the data fields and
  methods of a Date.
  @author Siddhi Kasera, Sonal Madhok
- */
+ **/
 import java.util.Calendar;
 public class Date {
     private int year;
@@ -18,12 +18,9 @@ public class Date {
     public static final int startYear = 1990;
     public static final int endYear = 2021;
 
-
-
-
     /**
      * Takes mm/dd/yyyy and creates a Date object
-     * @param date
+     * @param date string to store the month, day amd year
      */
 
     public Date(String date) {
@@ -53,22 +50,22 @@ public class Date {
     }
 
     /**
-     * returns the day instance variable
-     * @return day
+     * getter method returns the day instance variable
+     * @return day attribute of Date object
      */
     public int getDay() {
         return day;
     }
     /**
-     * returns the month instance variable
-     * @return day
+     * getter method returns the month instance variable
+     * @return month attribute of the Date object
      */
     public int getMonth() {
         return month;
     }
     /**
-     * returns the year instance variable
-     * @return day
+     * getter method returns the year instance variable
+     * @return year attribute of the Date object
      */
     public int getYear() {
         return year;
@@ -95,8 +92,6 @@ public class Date {
                 }else{
                     return false;
                 }
-            }else{
-                return false;
             }
         }
 

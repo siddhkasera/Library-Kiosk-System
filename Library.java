@@ -1,7 +1,7 @@
 /**
  * This class implements all the main commands.
  * @author Siddhi Kasera, Sonal Madhok
- */
+ **/
 public class Library {
     private static final int CAPACITY = 4;
     private static final int NOT_FOUND = -1;
@@ -24,7 +24,7 @@ public class Library {
     }
     /**
      * This is a helper method that traverses the books array and returns the index for the book in the array.
-     * @param book
+     * @param book object that is to be found in the array
      * @return index number if the book is found -1 otherwise
      */
     private int findIndex(Book book) {
@@ -52,7 +52,7 @@ public class Library {
     /**
      * This method increments and sets the serial number on books before they are added to the array.
      * It also keeps track of number of books added.
-     * @param book
+     * @param book object that has to be added in the array
      */
     public void add(Book book) {
 
@@ -73,8 +73,8 @@ public class Library {
     }
 
     /**
-     * Method is looks for a book in the array.
-     * @param book
+     * Private method is looks for a book in the array.
+     * @param book object that has to be found from the array
      * @return return 1 if the book is there in the array and 0 when the book is not there
      */
     private int find(Book book) {
@@ -91,7 +91,7 @@ public class Library {
 
     /**
      * Removes the book from the array books
-     * @param book
+     * @param book object that has to be removed from the array.
      * @return true if the book is successfully removed and false if it is not
      */
     public boolean remove(Book book) {
@@ -111,7 +111,7 @@ public class Library {
     /**
      * Sets the book instance to true if the book is available and can be checkedout and false if
      * the book is already checked out or not present in the library.
-     * @param book
+     * @param book object that has to be checked out from the array
      * @return true if the book can be checked out and false otherwise
      */
     public boolean checkOut(Book book) {
@@ -135,7 +135,7 @@ public class Library {
 
     /**
      * Method is used to return a checked out book to the library.
-     * @param book
+     * @param book attribute that has to be returned from the array
      * @return true if the book can be returned and false otherwise
      */
     public boolean returns(Book book) {

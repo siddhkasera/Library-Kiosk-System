@@ -1,7 +1,7 @@
 /**
  This class processes the commands entered in the command line.
  @author Siddhi Kasera, Sonal Madhok
- */
+ **/
 
 import java.lang.reflect.Array;
 import java.util.Scanner;
