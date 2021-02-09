@@ -15,6 +15,11 @@ public class Date {
     public static final int month30 = 30;
     public static final int month28 = 28;
     public static final int month29 = 29;
+    public static final int startYear = 1990;
+    public static final int endYear = 2021;
+
+
+
 
     /**
      * Takes mm/dd/yyyy and creates a Date object
@@ -41,9 +46,9 @@ public class Date {
     public Date () {
         Calendar today = Calendar.getInstance(); //gives instance of today's date
 
-        this.day = today.DAY_OF_MONTH;
-        this.month = today.MONTH;
-        this.year = today.YEAR;
+        day = today.get(Calendar.DAY_OF_MONTH);
+        month = today.get(Calendar.MONTH)+ 1;
+        year =  today.get(Calendar.YEAR);
 
     }
 
@@ -75,18 +80,25 @@ public class Date {
      */
     public boolean isValid() {
         boolean leap = false;
-        if(year < 1900 || year > 2021) {
+        if(year < startYear || year > endYear) {
             return false;
         }
-        Calendar cal = Calendar.getInstance();
-        int day1 = cal.DAY_OF_MONTH;
-        System.out.println("todays date:"+ day1);
-        int month1 = cal.MONTH;
-        System.out.println(month1);
-        int year1 = cal.YEAR;
-        System.out.println(year1);
 
-
+        Date futureDate = new Date();
+        int newDay = futureDate.getDay();
+        int newMonth = futureDate.getMonth();
+        int newYear = futureDate.getYear();
+        if(year == newYear){
+            if(month == newMonth){
+                if(day <= newDay){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
 
         //checking is a year is leap year.
         if(year % QUADRENNIAL  == 0) {
@@ -188,57 +200,62 @@ public class Date {
 
 class MainTest{
     public static void main(String[] args) {
-        /********** FUTURE DATE TESTING
-         System.out.println("Future Date Testing");
-         Date futureDate = new Date();
-         futureDate.setDay(futureDate.getDay() + 1);
-         //System.out.println("Today's date"+ toString(futureDate));
+        /********** FUTURE DATE TESTING  **********/
+         System.out.println("Future Date Testing for 03/20/2021");
+         Date futureDate = new Date("03/20/2021");
          System.out.println("isValid() returns: " + futureDate.isValid());
          System.out.println("Expected result: false" + "\n");
-         **********/
-        System.out.println("Month Testing");
-        System.out.println("Testing for Invalid Month!");
+
+        System.out.println("Future Date Testing for 03/20/2023");
+        Date futureDate1 = new Date("03/20/2023");
+        System.out.println("isValid() returns: " + futureDate.isValid());
+        System.out.println("Expected result: false" + "\n");
+
+
+        System.out.println("Testing for 13/1/2018");
         Date test1 = new Date("13/1/2018");
         System.out.println("isValid() returns:" + test1.isValid());
         System.out.println("Expected result: false" + "\n");
 
-        System.out.println("Testing for Valid Month!");
+        System.out.println("Testing for 12/2/2019");
         Date test2 = new Date("12/2/2019");
         System.out.println("isValid() returns:" + test2.isValid());
         System.out.println("Expected result: true" + "\n");
 
-        System.out.println("Testing for Valid Leap Year Month!");
+        System.out.println("Testing for 02/29/2004");
         Date test3 = new Date("02/29/2004");
         System.out.println("isValid() returns:" + test3.isValid());
         System.out.println("Expected result: true" + "\n");
 
-        System.out.println("Testing for Invalid Leap Year Day!");
+        System.out.println("Testing for 02/30/2004");
         Date test4 = new Date("02/30/2004");
         System.out.println("isValid() returns:" + test4.isValid());
         System.out.println("Expected result: false" + "\n");
 
-        System.out.println("Testing for Invalid Day!");
+        System.out.println("Testing for 12/32/2014");
         Date test5 = new Date("12/32/2014");
         System.out.println("isValid() returns:" + test5.isValid());
         System.out.println("Expected result: false" + "\n");
 
-        System.out.println("Testing for Invalid Year!");
+        System.out.println("Testing for 12/01/1899");
         Date test6 = new Date("12/01/1899");
         System.out.println("isValid() returns:" + test6.isValid());
         System.out.println("Expected result: false" + "\n");
 
-
+        System.out.println("Testing for 2/32/2018");
         Date test7 = new Date("2/32/2018");
         System.out.println("isValid() returns:"+ test7.isValid());
-        System.out.println("Expected result: false");
+        System.out.println("Expected result: false" + "\n");
 
+        System.out.println("Testing for 02/00/2018");
         Date test8 = new Date("02/00/2018");
         System.out.println("isValid() returns:"+ test8.isValid());
-        System.out.println("Expected result: false");
+        System.out.println("Expected result: false" + "\n");
 
+        System.out.println("Testing for 02/01/2018");
         Date dayTest3 = new Date("02/01/2018");
         System.out.println("isValid() returns:"+ dayTest3.isValid());
-        System.out.println("Expected result: true");
+        System.out.println("Expected result: true"+"\n");
 
 
     }
