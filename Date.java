@@ -75,10 +75,19 @@ public class Date {
      */
     public boolean isValid() {
         boolean leap = false;
-        int monthIncrement = 1;
         if(year < 1900 || year > 2021) {
             return false;
         }
+        Calendar cal = Calendar.getInstance();
+        int day1 = cal.DAY_OF_MONTH;
+        System.out.println("todays date:"+ day1);
+        int month1 = cal.MONTH;
+        System.out.println(month1);
+        int year1 = cal.YEAR;
+        System.out.println(year1);
+
+
+
         //checking is a year is leap year.
         if(year % QUADRENNIAL  == 0) {
             if(year % CENTENNIAL == 0) {
@@ -97,7 +106,7 @@ public class Date {
         //to check if day number is correct for a given month.
         switch(month) {
 
-            case Calendar.JANUARY+1:
+            case Calendar.JANUARY+ 1:
                 if ( day < 1 || day > month31 ) {
                     return false;
                 }
