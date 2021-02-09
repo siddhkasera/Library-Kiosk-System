@@ -1,131 +1,103 @@
+/**
+ This class processes the commands entered in the command line.
+ @author Siddhi Kasera, Sonal Madhok
+ */
+
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Kiosk {
-
     public static String serialNumber;
 
-    //  --- RESOLVED --  Library bookBag; //QUESTION: in order to access the methods from Library, we have to create it here right? -- this did nothing lol.
-
+    /**
+     * This method reads from the command line, parses the input and calls the respective functions.
+     */
     public void run() {
-
-        //Create Scanner and Library constructors
+        //Scanning the input
         Scanner in = new Scanner(System.in);
         Library bag = new Library();
         Date date = new Date();
 
-        //Declare/Initialize variables
 
+        //Declare/Initialize variables
+        String command = "";
         int i = 0;
         String s = null;
         boolean hasNextLine = in.hasNext();
 
-
-
         //Using Scanner for Getting input from user
-        // -- RESOLVED -- QUESTION: Do I keep scanning until there is a Q command? How do I do this in JAVA?
         while (hasNextLine) {
-            s = in.nextLine();//nextLine reads the line after you press enter
+            s = in.nextLine(); //nextLine reads
             String[] arrOfStr = s.split(","); //Tokenizing the array from the Scanner
+            command = arrOfStr[0];
 
-            /*TESTING PURPOSES -- System.out.println("You entered string " + s);
-            for (String a: arrOfStr)
-                System.out.println(a);
-             */
-
-            String command = arrOfStr[0];
-            if(arrOfStr.length > 1) {
-                serialNumber = arrOfStr[1];
-            }
             switch (command) {
-                case "A":
-
+                case "A":  //handling command add
                     String bookName = arrOfStr[1];
-
-                    Book addBook = new Book(bookName, null, false, null);
-
-                    //Date addDate = new Date(arrOfStr[2]);
-                    //addBook.setDate(addDate); //QUESTION: How to use Date class here? Is this right?
-                    //System.out.print(addDate); //TESTING PURPOSES
-
+                    String datePubStr = arrOfStr[2];
+                    Book addBook = new Book(bookName, datePubStr);
+                    if (addBook.getDate().isValid()) {
                     bag.add(addBook);
+                    System.out.println(addBook.getName() + " added to the Library.");
+                     }else {
+                        System.out.println("Invalid Date!");
+                    }
                     break;
 
-                // -- RESOLVED -- QUESTION: Am I accessing this wrong?
-                //-- RESOLVED -- QUESTION: Is this the correct way to add a new book object to pass to my library?
-                //How do we edit the number? How to edit checkedOut values?
-                //I think I am confused on using my Book class to tie this all together
-                //Does my object addBook add itself to my array in the Library class?
-
-                //System.out.println(bookObj.getName()); //TESTING PURPOSES. delete later.
-
-
-                case "R":
-                    //serialNumber = arrOfStr[1];
-                    Book removeBook = new Book(null, serialNumber, false, null);
-                    bag.remove(removeBook);
-                    break;
-
-                case "O":
+                case "R":  //handling command remove
                     serialNumber = arrOfStr[1];
-                    Book checkOutBook = new Book(null, serialNumber, false, null);
-                    bag.checkOut(checkOutBook);
+                    Book removeBook = new Book(serialNumber);
+                    if(bag.remove(removeBook)){
+                        System.out.println("Book#" + serialNumber + " removed.");
+                    }else {
+                        System.out.println("Unable to remove, the library does not have this book.");
+                    }
                     break;
 
-                case "I":
-                    //QUESTION: is there a way to not have repeated code in these cases?
+
+                case "O": //handling command checkout
                     serialNumber = arrOfStr[1];
-                    Book returnBook = new Book(null, serialNumber, false, null);
-                    bag.returns(returnBook);
+                    Book checkOutBook = new Book(serialNumber);
+                    if(bag.checkOut(checkOutBook)){
+                        System.out.println("Book#" + serialNumber + " is not available.");
+                    }else {
+                        checkOutBook.setCheckedOut(true);
+                        System.out.println("You've checked out Book#"+ serialNumber + ". Enjoy!.");
+                    }
                     break;
 
-                case "PA":
+                case "I": //handling return command
+                    serialNumber = arrOfStr[1];
+                    Book returnBook = new Book(serialNumber);
+                    if(bag.returns(returnBook)){
+                        System.out.println("Unable to return Book#" + serialNumber);
+                    }else{
+                        System.out.println("Book#" + serialNumber + " return has completed. Thanks!");
+                    }
+                    break;
+
+                case "PA":  //printing the list of books
                     bag.print();
                     break;
 
-                case "PD":
+                case "PD": //printing the list of books by date
                     bag.printByDate();
                     break;
 
-                //case "PN":
-                //  bag.printByNumber();
-                // break;
+                case "PN": //printing the list of books by serial number
+                    bag.printByNumber();
+                    break;
 
-                case "Q":
+                case "Q": //exiting a kiosk session
                     System.out.println("Kiosk session ended");
                     System.exit(0);
                     break;
 
                 default:
-                    System.err.println("Invalid command: " + command + " expected 'A, R, O, I, PA, PD, PN, Q'.");
+                    System.err.println("Invalid command: " + command);
                     break;
             }
         }
 
     }
 }
-
-
-            /* Notes: StringTokenizer st = new StringTokenizer(s, ","); //Use StringTokenizer with comma as delimiter
-
-            String[] tokens = new String[capacity]; //Array for storing tokens
-
-            //Place tokens from string into tokens array
-            while (st.hasMoreTokens()) {
-                int count = st.countTokens();
-                tokens[i] = st.nextToken();
-                i++;
-            }
-
-            /*
-            notes from office hours 1/29/21:
-            store the first line into buffer mechanism
-            don't parse command until 2nd line is put into system
-            for now assume every line is complete
-            if the command line isn't complete -- output "invalid command"
-            suggestion: have separate class for testcases and use in main
-
-
-//Place each command into a case and handle them from there
-//i = 0; //do you mean like this?
-
-*/

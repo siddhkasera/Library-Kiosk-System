@@ -1,4 +1,8 @@
-import java.time.Month; //we cannot import this library
+/**
+ This class defines the abstract data type Date which encapsulates the data fields and
+ methods of a Date.
+ @author Siddhi Kasera, Sonal Madhok
+ */
 import java.util.Calendar;
 public class Date {
     private int year;
@@ -12,16 +16,16 @@ public class Date {
     public static final int month28 = 28;
     public static final int month29 = 29;
 
-    public Date(String date) { //taking mm/dd/yyyy and create a Date object
+    /**
+     * Takes mm/dd/yyyy and creates a Date object
+     * @param date
+     */
 
-        //Split the string from date variable in here
-        String[] arrOfDate = date.split("/");
-
-        //Assigning array of date to the first number(s) in 'mm' for 'mm/dd/yyyy' & Stripping the monthStr from any spaces so parseInt works.
+    public Date(String date) {
+        String[] arrOfDate = date.split("/"); //Split the string from date variable
         String monthStr = arrOfDate[0];
         monthStr = monthStr.strip();
 
-        //Assigning the day, month, year -- turning the string into integer so the Date underneath can use it
         month = Integer.parseInt(monthStr);
         day = Integer.parseInt(arrOfDate[1]);
         year = Integer.parseInt(arrOfDate[2]);
@@ -29,18 +33,13 @@ public class Date {
         this.month = month;
         this.day = day;
         this.year = year;
-
-        /*TESTING PURPOSES:
-        System.out.println(month);
-        System.out.println(day);
-        System.out.println(year);
-         */
     }
 
-    public Date () // create object with today's date (see Calendar class)
-    {
-        //use the calendar class, getInstance() will give today's information
-        Calendar today = Calendar.getInstance(); //gives instance of today's information
+    /**
+     * No Parameter Constructor creates an object with today's date.
+     */
+    public Date () {
+        Calendar today = Calendar.getInstance(); //gives instance of today's date
 
         this.day = today.DAY_OF_MONTH;
         this.month = today.MONTH;
@@ -48,43 +47,54 @@ public class Date {
 
     }
 
+    /**
+     * returns the day instance variable
+     * @return day
+     */
     public int getDay() {
         return day;
     }
-
+    /**
+     * returns the month instance variable
+     * @return day
+     */
     public int getMonth() {
         return month;
     }
-
+    /**
+     * returns the year instance variable
+     * @return day
+     */
     public int getYear() {
         return year;
     }
 
-    public boolean isValid()
-    //TODO CHECK THIS METHOD for functionality
-    {
+    /**
+     * Checks if the date entered is valid.
+     * @return true if the date is valid with the correct day in a particular month for a year otherwise false
+     */
+    public boolean isValid() {
         boolean leap = false;
         int monthIncrement = 1;
         if(year < 1900 || year > 2021) {
             return false;
         }
-
-        if(year % QUADRENNIAL  == 0) { //step 1
-            if(year % CENTENNIAL == 0) { //step 2
-                if(year % QUATERCENTENNIAL  == 0) { //step 3
-                    leap = true; //step 4
+        //checking is a year is leap year.
+        if(year % QUADRENNIAL  == 0) {
+            if(year % CENTENNIAL == 0) {
+                if(year % QUATERCENTENNIAL  == 0) {
+                    leap = true;
                 }else {
-                    leap = false; //step 5
+                    leap = false;
                 }
             }else {
-                leap = true; //step 4
+                leap = true;
             }
         }else {
-            leap = false; // step5
+            leap = false;
         }
 
-
-        //we can use our own algo here
+        //to check if day number is correct for a given month.
         switch(month) {
 
             case Calendar.JANUARY+1:
