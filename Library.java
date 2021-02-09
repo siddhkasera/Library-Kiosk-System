@@ -157,11 +157,13 @@ public class Library {
         if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books in library.");
-        for (int i = 0; i < numBooks; i++) {
-            System.out.println(books[i]);
+        if(numBooks>0) {
+            System.out.println("**List of books in library.");
+            for (int i = 0; i < numBooks; i++) {
+                System.out.println(books[i]);
+            }
+            System.out.println("**End of list.");
         }
-        System.out.println("**End of list.");
     }
 
     /**
@@ -176,15 +178,17 @@ public class Library {
 
         String date = String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year);
 
-        if(numBooks == START){
+        if (numBooks == START) {
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books by the date published.");
-        for(int i =START; i<numBooks; i++) {
+        if (numBooks > 0){
+            System.out.println("**List of books by the date published.");
+        for (int i = START; i < numBooks; i++) {
             //
             System.out.println(books[i]);
         }
         System.out.println("**End of list.");
+     }
     } //print the list of books by datePublished (ascending)
 
     /**
@@ -195,11 +199,13 @@ public class Library {
         if(numBooks == 0){
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books by the book numbers.");
-        for (int i = 0; i < numBooks; i++) {
+        if(numBooks>0) {
+            System.out.println("**List of books by the book numbers.");
+            for (int i = 0; i < numBooks; i++) {
                 System.out.println(books[i].getNumber());
+            }
+            System.out.println("**End of list.");
         }
-        System.out.println("**End of list.");
     }
 }
 
