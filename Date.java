@@ -181,11 +181,66 @@ public class Date {
 
             default:
                 return false;
-
         }
-
-
         return true;
     }
 }
 
+class MainTest{
+    public static void main(String[] args) {
+        /********** FUTURE DATE TESTING
+         System.out.println("Future Date Testing");
+         Date futureDate = new Date();
+         futureDate.setDay(futureDate.getDay() + 1);
+         //System.out.println("Today's date"+ toString(futureDate));
+         System.out.println("isValid() returns: " + futureDate.isValid());
+         System.out.println("Expected result: false" + "\n");
+         **********/
+        System.out.println("Month Testing");
+        System.out.println("Testing for Invalid Month!");
+        Date test1 = new Date("13/1/2018");
+        System.out.println("isValid() returns:" + test1.isValid());
+        System.out.println("Expected result: false" + "\n");
+
+        System.out.println("Testing for Valid Month!");
+        Date test2 = new Date("12/2/2019");
+        System.out.println("isValid() returns:" + test2.isValid());
+        System.out.println("Expected result: true" + "\n");
+
+        System.out.println("Testing for Valid Leap Year Month!");
+        Date test3 = new Date("02/29/2004");
+        System.out.println("isValid() returns:" + test3.isValid());
+        System.out.println("Expected result: true" + "\n");
+
+        System.out.println("Testing for Invalid Leap Year Day!");
+        Date test4 = new Date("02/30/2004");
+        System.out.println("isValid() returns:" + test4.isValid());
+        System.out.println("Expected result: false" + "\n");
+
+        System.out.println("Testing for Invalid Day!");
+        Date test5 = new Date("12/32/2014");
+        System.out.println("isValid() returns:" + test5.isValid());
+        System.out.println("Expected result: false" + "\n");
+
+        System.out.println("Testing for Invalid Year!");
+        Date test6 = new Date("12/01/1899");
+        System.out.println("isValid() returns:" + test6.isValid());
+        System.out.println("Expected result: false" + "\n");
+
+
+        Date test7 = new Date("2/32/2018");
+        System.out.println("isValid() returns:"+ test7.isValid());
+        System.out.println("Expected result: false");
+
+        Date test8 = new Date("02/00/2018");
+        System.out.println("isValid() returns:"+ test8.isValid());
+        System.out.println("Expected result: false");
+
+        Date dayTest3 = new Date("02/01/2018");
+        System.out.println("isValid() returns:"+ dayTest3.isValid());
+        System.out.println("Expected result: true");
+
+
+    }
+
+}
