@@ -41,8 +41,6 @@ public class Book{
     }
 
     public Date getDate(){
-
-
         return this.datePublished;
     }
 
@@ -65,27 +63,60 @@ public class Book{
     public boolean equals(Object obj) {
         if (obj instanceof Book) {
             Book book = (Book) obj;
-            return book.number.equals(this.number);
-
-            //use the formatting in the notes. on canvas. click modules. under week #2 2.1 additional notes for project 1.-- use that
-            //scroll to the bottom and write the equals method in that way.
+            return this.number.equals(book.number);
         }
         return false;
     }
+
+    public int compareByDate(Book book) {
+
+        //-1 is less than
+        // 0 is equal
+        //1 is greater than
+        //-2 means it didn't hit any case
+
+        if (datePublished.getYear() < book.datePublished.getYear()) {
+            return -1;
+        } else if (datePublished.getYear() == book.datePublished.getYear()) {
+            if (datePublished.getMonth() < book.datePublished.getMonth()) {
+                return -1;
+            } else if (datePublished.getMonth() == book.datePublished.getMonth()) {
+                if (datePublished.getDay() < book.datePublished.getDay()) {
+                    return -1;
+                } else if (datePublished.getDay() == book.datePublished.getDay()) {
+                    return 0; //this date is equal to the date being compared
+                } else if (datePublished.getDay() > book.datePublished.getDay()) {
+                    return 1;
+                }
+
+            } else if (datePublished.getMonth() > book.datePublished.getMonth()) {
+                return 1;
+            }
+
+        }
+        else if (datePublished.getYear() > book.datePublished.getYear()){
+            return 1;
+        }
+        return -2;
+    }
+
 
     @Override
     public String toString(){
 
         if (isCheckedOut()) {
-            return "Book#" + this.number + "::" + this.name + "::"+ String.valueOf(datePublished.getMonth())+"/"+String.valueOf(datePublished.getDay())
-                    +"/"+ String.valueOf(datePublished.getYear()) +"::"+ "is checked out.";
+            String number = this.number;
+            String name = this.name;
+            String month = String.valueOf(datePublished.getMonth());
+            String day = String.valueOf(datePublished.getDay());
+            String year= String.valueOf(datePublished.getYear());
 
+            return "Book#" + number + "::" + name + "::"+ month+"/"+ day
+                    +"/"+ year +"::"+ "is checked out.";
         }
         else {
             return "Book#" + this.number + "::" + this.name + "::"+ String.valueOf(datePublished.getMonth())+"/"+String.valueOf(datePublished.getDay())
                     +"/"+ String.valueOf(datePublished.getYear()) +"::"+ "is available.";
-            }
-
+        }
     }
-
 }
