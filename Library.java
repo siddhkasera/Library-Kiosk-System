@@ -194,15 +194,25 @@ public class Library {
      * Prints the list of the book by number in the ascending order.
      */
     public void printByNumber() { //print the list of books by number (ascending)
-
-        if(numBooks == 0){
+        int arrSerialNumbers[] = new int[numBooks];
+        int j = 0;
+        System.out.println("**List of books by the book numbers.");
+        if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books by the book numbers.");
+        //populate the serial numbers into an array
         for (int i = 0; i < numBooks; i++) {
-                System.out.println(books[i].getNumber());
+            arrSerialNumbers[i] = (Integer.valueOf(books[i].getNumber()));
         }
+        selectionSort(arrSerialNumbers);
+            for (int element : arrSerialNumbers) {
+                if (element == Integer.valueOf(books[j].getNumber())) {
+                    System.out.println(books[j]);
+                }
+                j++;
+            }
         System.out.println("**End of list.");
+    }
     }
 }
 
