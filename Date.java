@@ -86,10 +86,10 @@ public class Date {
         int newMonth = futureDate.getMonth();
         int newYear = futureDate.getYear();
         if(year == newYear){
-            if(month == newMonth){
-                if(day <= newDay){
+            if(month == newMonth) {
+                if (day <= newDay) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
