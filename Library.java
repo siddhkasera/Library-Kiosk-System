@@ -132,7 +132,7 @@ public class Library {
         if (found == FOUND && books[index].isCheckedOut()) {
             books[index].setCheckedOut(false);
         }
-        if (index == -1 || books[index].isCheckedOut() == false) {
+        else if (index == -1 || books[index].isCheckedOut() == false) {
             return true;
         }
         return false;
