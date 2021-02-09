@@ -94,7 +94,7 @@ public class Kiosk {
                     break;
 
                 default:
-                    System.err.println("Invalid command: " + command);
+                    System.err.println("Invalid command!");
                     break;
             }
         }
