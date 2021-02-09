@@ -18,7 +18,7 @@ public class Kiosk {
         Library bag = new Library();
         Date date = new Date();
 
-
+        System.out.println("Library Kiosk running.");
         //Declare/Initialize variables
         String command = "";
         int i = 0;

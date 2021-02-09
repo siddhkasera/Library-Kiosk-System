@@ -146,6 +146,9 @@ public class Library {
         if(found==FOUND && books[index].isCheckedOut()) {
             books[index].setCheckedOut(false);
         }
+        if(index == -1){
+            return true;
+        }
         return false;
     }
 
@@ -157,11 +160,13 @@ public class Library {
         if(numBooks == 0){
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books in library.");
-        for(int i =0; i<numBooks; i++) {
-            System.out.println(books[i]);
+        if(numBooks > 0) {
+            System.out.println("**List of books in library.");
+            for (int i = 0; i < numBooks; i++) {
+                System.out.println(books[i]);
+            }
+            System.out.println("**End of list.");
         }
-        System.out.println("**End of list.");
     }
 
     /**
@@ -179,27 +184,60 @@ public class Library {
         if(numBooks == START){
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books by the date published.");
-        for(int i =START; i<numBooks; i++) {
-            //
-            System.out.println(books[i]);
+        if (numBooks > 0) {
+            System.out.println("**List of books by the date published.");
+            for (int i = START; i < numBooks; i++) {
+                //
+                System.out.println(books[i]);
+            }
+            System.out.println("**End of list.");
         }
-        System.out.println("**End of list.");
     } //print the list of books by datePublished (ascending)
 
     /**
      * Prints the list of the book by number in the ascending order.
      */
     public void printByNumber() { //print the list of books by number (ascending)
+        int arrSerialNumbers[] = new int[numBooks];
+        int j = 0;
 
-        if(numBooks == 0){
+        if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
         }
-        System.out.println("**List of books by the book numbers.");
-        for (int i = 0; i < numBooks; i++) {
-                System.out.println(books[i].getNumber());
+        if(numBooks>0) {
+            System.out.println("**List of books by the book numbers.");
+            //populate the serial numbers into an array
+            for (int i = 0; i < numBooks; i++) {
+                arrSerialNumbers[i] = (Integer.valueOf(books[i].getNumber()));
+            }
+            selectionSort(arrSerialNumbers);
+            for (int element : arrSerialNumbers) {
+                if (element == Integer.valueOf(books[j].getNumber())) {
+                    System.out.println(books[j].getNumber());
+                }
+                j++;
+            }
+            System.out.println("**End of list.");
         }
-        System.out.println("**End of list.");
     }
-}
 
+    /**
+     * This is a helper method that sorts an array of integers with selection sort.
+     * @param arr
+     */
+    public void selectionSort(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int index = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[index]) {
+                    index = j;
+                }
+            }
+            int smallerNumber = arr[index];
+            arr[index] = arr[i];
+            arr[i] = smallerNumber;
+        }
+
+    }
+
+}
