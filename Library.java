@@ -132,7 +132,7 @@ public class Library {
         if (found == FOUND && books[index].isCheckedOut()) {
             books[index].setCheckedOut(false);
         }
-        if (index == -1) {
+        if (index == -1 && !books[index].isCheckedOut()) {
             return true;
         }
         return false;
@@ -156,13 +156,17 @@ public class Library {
 
      */
     public void printByDate() {
+        Book[] sortDate = new Book[books.length];
         System.out.println("**List of books by the date published.");
         if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
         }
-        sortByDate();
+        for(int i =0; i < numBooks; i++) {
+            sortDate[i] = books[i];
+        }
+        sortByDate(sortDate);
         for (int i = 0; i < numBooks; i++) {
-            System.out.println(books[i]);
+            System.out.println(sortDate[i]);
             }
         System.out.println("**End of list.");
     } //print the list of books by datePublished (ascending)
@@ -170,22 +174,21 @@ public class Library {
     /*
     helper method for printByDate
      */
-    public void sortByDate() {
+    public void sortByDate(Book[] sortDate) {
 
         for (int i = 0; i < numBooks-1; i++) {
             int index = i;
             for (int j = i +1; j < numBooks; j++){
-            if (books[i+1] == null) {
+            if (sortDate[i+1] == null) {
                 break;
             }
-            if (books[j].compareByDate(books[index]) == -1) {
+            if (sortDate[j].compareByDate(sortDate[index]) == -1) {
                 index = j;
-                //System.out.println("book1 is less than book2");
             }
         }
-            Book olderDate = books[index];
-            books[index] = books[i];
-            books[i] = olderDate;
+            Book olderDate = sortDate[index];
+            sortDate[index] = sortDate[i];
+            sortDate[i] = olderDate;
         }
 
 }
