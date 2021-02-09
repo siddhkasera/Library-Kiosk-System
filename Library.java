@@ -138,13 +138,16 @@ public class Library {
      * @param book
      * @return true if the book can be returned and false otherwise
      */
-    public boolean returns(Book book) {
+        public boolean returns(Book book) {
 
         int found = find(book);
         int index = findIndex(book);
 
         if(found==FOUND && books[index].isCheckedOut()) {
             books[index].setCheckedOut(false);
+        }
+        if(index == -1){
+            return true;
         }
         return false;
     }
