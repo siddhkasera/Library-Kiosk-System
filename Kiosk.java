@@ -37,9 +37,9 @@ public class Kiosk {
                     String datePubStr = arrOfStr[2];
                     Book addBook = new Book(bookName, datePubStr);
                     if (addBook.getDate().isValid()) {
-                    bag.add(addBook);
-                    System.out.println(addBook.getName() + " added to the Library.");
-                     }else {
+                        bag.add(addBook);
+                        System.out.println(addBook.getName() + " added to the Library.");
+                    } else {
                         System.out.println("Invalid Date!");
                     }
                     break;
@@ -47,9 +47,9 @@ public class Kiosk {
                 case "R":  //handling command remove
                     serialNumber = arrOfStr[1];
                     Book removeBook = new Book(serialNumber);
-                    if(bag.remove(removeBook)){
+                    if (bag.remove(removeBook)) {
                         System.out.println("Book#" + serialNumber + " removed.");
-                    }else {
+                    } else {
                         System.out.println("Unable to remove, the library does not have this book.");
                     }
                     break;
@@ -58,20 +58,20 @@ public class Kiosk {
                 case "O": //handling command checkout
                     serialNumber = arrOfStr[1];
                     Book checkOutBook = new Book(serialNumber);
-                    if(bag.checkOut(checkOutBook)){
+                    if (bag.checkOut(checkOutBook)) {
                         System.out.println("Book#" + serialNumber + " is not available.");
-                    }else {
+                    } else {
                         checkOutBook.setCheckedOut(true);
-                        System.out.println("You've checked out Book#"+ serialNumber + ". Enjoy!.");
+                        System.out.println("You've checked out Book#" + serialNumber + ". Enjoy!.");
                     }
                     break;
 
                 case "I": //handling return command
                     serialNumber = arrOfStr[1];
                     Book returnBook = new Book(serialNumber);
-                    if(bag.returns(returnBook)){
+                    if (bag.returns(returnBook)) {
                         System.out.println("Unable to return Book#" + serialNumber);
-                    }else{
+                    } else {
                         System.out.println("Book#" + serialNumber + " return has completed. Thanks!");
                     }
                     break;

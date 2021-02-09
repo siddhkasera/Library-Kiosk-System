@@ -154,11 +154,11 @@ public class Library {
      */
     public void print() {
 
-        if(numBooks == 0){
+        if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
         }
         System.out.println("**List of books in library.");
-        for(int i =0; i<numBooks; i++) {
+        for (int i = 0; i < numBooks; i++) {
             System.out.println(books[i]);
         }
         System.out.println("**End of list.");
