@@ -1,29 +1,36 @@
 /**
- This class defines the abstract data type Book which encapsulates the data fields and
- methods of a book.
- @author Siddhi Kasera, Sonal Madhok
+ * This class defines the abstract data type Book which encapsulates the data fields and
+ * methods of a book.
+ *
+ * @author Siddhi Kasera, Sonal Madhok
  **/
-public class Book{
+public class Book {
     private String number;
     private String name;
     private boolean checkedOut;
     private Date datePublished;
+    private static int lessThan = -1;
+    private static int equals = 0;
+    private static int greaterThan = 1;
 
     /**
-     *  A four parameter Book constructor that initializes an Book object when it is created.
-     * @param name attribute for a book object
-     * @param number attribute for a book object
-     * @param checkedOut attribute for a book object
+     * A four parameter Book constructor that initializes an Book object when it is created.
+     *
+     * @param name          attribute for a book object
+     * @param number        attribute for a book object
+     * @param checkedOut    attribute for a book object
      * @param datePublished attribute for a book object
      */
-    public Book(String name, String number, boolean checkedOut, Date datePublished){
+    public Book(String name, String number, boolean checkedOut, Date datePublished) {
         this.setName(name);
         this.setNumber(number);
         this.setCheckedOut(checkedOut);
         this.setDate(datePublished);
     }
 
-    /** A two parameter constructor that initializes an Book object.
+    /**
+     * A two parameter constructor that initializes an Book object.
+     *
      * @param name attribute for a book object
      * @param date attribute for a book object
      */
@@ -35,74 +42,92 @@ public class Book{
 
     /**
      * A one parameter constructor that intializes an Book object.
+     *
      * @param serial number attribute for a book object
      */
-    public Book(String serial){
-        number=serial;
+    public Book(String serial) {
+        number = serial;
         name = null;
         checkedOut = false;
         datePublished = null;
     }
+
     /**
      * Returns the name instance variable
+     *
      * @return name attribute for a Book object
      */
-    public String getName(){
+    public String getName() {
         return this.name;
 
     }
+
     /**
      * Returns the number instance variable
+     *
      * @return number attribute of a Book object
      */
-    public String getNumber(){
+    public String getNumber() {
         return this.number;
     }
+
     /**
      * Returns the checkedOut instance variable
+     *
      * @return checkedOut attribute of Book object
      */
-    public boolean isCheckedOut(){
+    public boolean isCheckedOut() {
         return this.checkedOut;
     }
+
     /**
      * Returns the datePublished instance variable
-     *@return datePublished  attribute of Book object
+     *
+     * @return datePublished  attribute of Book object
      */
-    public Date getDate(){
+    public Date getDate() {
         return this.datePublished;
     }
+
     /**
      * Sets the name instance variable
+     *
      * @param name attribute is set for a given object
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
+
     /**
      * Sets the number instance variable
+     *
      * @param number attribute is set for a given book object
      */
-    public void setNumber(String number){
+    public void setNumber(String number) {
         this.number = number;
     }
+
     /**
      * Sets the checkedOut instance variable
+     *
      * @param checkedOut attricute is set for a given book object
      */
-    public void setCheckedOut(boolean checkedOut){
+    public void setCheckedOut(boolean checkedOut) {
         this.checkedOut = checkedOut;
     }
+
     /**
      * Sets the date instance variable
-     * @param  date attribute is set for a given book object
+     *
+     * @param date attribute is set for a given book object
      */
-    public void setDate(Date date){
+    public void setDate(Date date) {
         this.datePublished = date;
     }
 
     /**
      * Returns true if this book number is equal to the argument book number.
+     *
      * @param obj the other book
      * @return {@code true} if this book has the same number as {@code obj};
      * {@code false} otherwise
@@ -117,27 +142,58 @@ public class Book{
     }
 
     /**
+     * Comparing two dates for two book objects within the array
+     *
+     * @param book object that is used to compare in the sortByDate method in Library.java
+     * @return int -1 if less than 0 if equal and 1 if greater than
+     */
+    public int compareByDate(Book book) {
+        if (datePublished.getYear() < book.datePublished.getYear()) {
+            return lessThan;
+        } else if (datePublished.getYear() == book.datePublished.getYear()) {
+            if (datePublished.getMonth() < book.datePublished.getMonth()) {
+                return lessThan;
+            } else if (datePublished.getMonth() == book.datePublished.getMonth()) {
+                if (datePublished.getDay() < book.datePublished.getDay()) {
+                    return lessThan;
+                } else if (datePublished.getDay() == book.datePublished.getDay()) {
+                    return equals; //this date is equal to the date being compared
+                } else if (datePublished.getDay() > book.datePublished.getDay()) {
+                    return greaterThan;
+                }
+
+            } else if (datePublished.getMonth() > book.datePublished.getMonth()) {
+                return greaterThan;
+            }
+
+        } else if (datePublished.getYear() > book.datePublished.getYear()) {
+            return greaterThan;
+        }
+        return equals;
+    }
+
+    /**
      * Returns a string representation of this book.
+     *
      * @return a string representation of this book.
      */
     @Override
-    public String toString(){
+    public String toString() {
 
         if (isCheckedOut()) {
             String number = this.number;
             String name = this.name;
             String month = String.valueOf(datePublished.getMonth()); //stores month of a date as a string
             String day = String.valueOf(datePublished.getDay());//stores day of a date as a string
-            String year= String.valueOf(datePublished.getYear());//stores year of a date as a string
+            String year = String.valueOf(datePublished.getYear());//stores year of a date as a string
 
 
-            return "Book#" + number + "::" + name + "::"+ month+"/"+ day
-                    +"/"+ year +"::"+ "is checked out.";
+            return "Book#" + number + "::" + name + "::" + month + "/" + day
+                    + "/" + year + "::" + "is checked out.";
 
-        }
-        else {
-            return "Book#" + this.number + "::" + this.name + "::"+ String.valueOf(datePublished.getMonth())+"/"+String.valueOf(datePublished.getDay())
-                    +"/"+ String.valueOf(datePublished.getYear()) +"::"+ "is available.";
+        } else {
+            return "Book#" + this.number + "::" + this.name + "::" + String.valueOf(datePublished.getMonth()) + "/" + String.valueOf(datePublished.getDay())
+                    + "/" + String.valueOf(datePublished.getYear()) + "::" + "is available.";
         }
 
     }

@@ -1,10 +1,11 @@
-/**
- This class processes the commands entered in the command line.
- @author Siddhi Kasera, Sonal Madhok
- **/
-
 import java.lang.reflect.Array;
 import java.util.Scanner;
+
+/**
+ * This class processes the commands entered in the command line.
+ *
+ * @author Siddhi Kasera, Sonal Madhok
+ **/
 
 public class Kiosk {
     public static String serialNumber;

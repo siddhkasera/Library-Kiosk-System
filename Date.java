@@ -1,15 +1,17 @@
-/**
- This class defines the abstract data type Date which encapsulates the data fields and
- methods of a Date.
- @author Siddhi Kasera, Sonal Madhok
- **/
 import java.util.Calendar;
+
+/**
+ * This class defines the abstract data type Date which encapsulates the data fields and
+ * methods of a Date.
+ *
+ * @author Siddhi Kasera, Sonal Madhok
+ **/
 public class Date {
     private int year;
     private int month;
     private int day;
     public static final int QUADRENNIAL = 4;
-    public static final  int CENTENNIAL = 100;
+    public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
     public static final int month31 = 31;
     public static final int month30 = 30;
@@ -20,6 +22,7 @@ public class Date {
 
     /**
      * Takes mm/dd/yyyy and creates a Date object
+     *
      * @param date string to store the month, day amd year
      */
 
@@ -40,31 +43,36 @@ public class Date {
     /**
      * No Parameter Constructor creates an object with today's date.
      */
-    public Date () {
+    public Date() {
         Calendar today = Calendar.getInstance(); //gives instance of today's date
 
         day = today.get(Calendar.DAY_OF_MONTH);
-        month = today.get(Calendar.MONTH)+ 1;
-        year =  today.get(Calendar.YEAR);
+        month = today.get(Calendar.MONTH) + 1;
+        year = today.get(Calendar.YEAR);
 
     }
 
     /**
      * getter method returns the day instance variable
+     *
      * @return day attribute of Date object
      */
     public int getDay() {
         return day;
     }
+
     /**
      * getter method returns the month instance variable
+     *
      * @return month attribute of the Date object
      */
     public int getMonth() {
         return month;
     }
+
     /**
      * getter method returns the year instance variable
+     *
      * @return year attribute of the Date object
      */
     public int getYear() {
@@ -73,115 +81,115 @@ public class Date {
 
     /**
      * Checks if the date entered is valid.
+     *
      * @return true if the date is valid with the correct day in a particular month for a year otherwise false
      */
     public boolean isValid() {
         boolean leap = false;
-        if(year < startYear || year > endYear) {
+        if (year < startYear || year > endYear) {
             return false;
         }
 
         Date futureDate = new Date();
-        int newDay = futureDate.getDay();
-        int newMonth = futureDate.getMonth();
-        int newYear = futureDate.getYear();
-        if(year == newYear){
-            if(month == newMonth) {
-                if (day <= newDay) {
-                    return true;
-                } else {
+        int newDay = futureDate.getDay(); //9
+        int newMonth = futureDate.getMonth(); //2
+        int newYear = futureDate.getYear(); //2021
+        if (year == newYear) {
+            if (month >= newMonth) {
+                return false;
+            } else if (month == newMonth) {
+                if (day > newDay)
                     return false;
-                }
             }
         }
 
         //checking is a year is leap year.
-        if(year % QUADRENNIAL  == 0) {
-            if(year % CENTENNIAL == 0) {
-                if(year % QUATERCENTENNIAL  == 0) {
+        if (year % QUADRENNIAL == 0) {
+            if (year % CENTENNIAL == 0) {
+                if (year % QUATERCENTENNIAL == 0) {
                     leap = true;
-                }else {
+                } else {
                     leap = false;
                 }
-            }else {
+            } else {
                 leap = true;
             }
-        }else {
+        } else {
             leap = false;
         }
 
         //to check if day number is correct for a given month.
-        switch(month) {
+        switch (month) {
 
-            case Calendar.JANUARY+ 1:
-                if ( day < 1 || day > month31 ) {
+            case Calendar.JANUARY + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
-            case Calendar.FEBRUARY+1:
-                if(leap) {
-                    if(day <1 || day >  month29) {
+            case Calendar.FEBRUARY + 1:
+                if (leap) {
+                    if (day < 1 || day > month29) {
                         return false;
                     }
-                }else if(day < 1 || day >  month28) {
+                } else if (day < 1 || day > month28) {
                     return false;
                 }
 
                 break;
-            case Calendar.MARCH+1:
-                if(day <1 || day > month31) {
+            case Calendar.MARCH + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
-            case Calendar.APRIL+1:
-                if(day <1 || day > month30) {
-                    return false;
-                }
-                break;
-
-            case Calendar.MAY+1:
-                if(day <1 || day > month31) {
+            case Calendar.APRIL + 1:
+                if (day < 1 || day > month30) {
                     return false;
                 }
                 break;
 
-            case Calendar.JUNE+1:
-                if(day <1 || day >  month30) {
+            case Calendar.MAY + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
 
-            case Calendar.JULY+1:
-                if(day <1 || day >  month31) {
+            case Calendar.JUNE + 1:
+                if (day < 1 || day > month30) {
                     return false;
                 }
                 break;
 
-            case Calendar.AUGUST+1:
-                if(day <1 || day >  month31) {
+            case Calendar.JULY + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
 
-            case Calendar.SEPTEMBER+1:
-                if(day <1 || day >  month30) {
+            case Calendar.AUGUST + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
 
-            case Calendar.OCTOBER+1:
-                if(day <1 || day >  month31) {
+            case Calendar.SEPTEMBER + 1:
+                if (day < 1 || day > month30) {
                     return false;
                 }
                 break;
 
-            case Calendar.NOVEMBER+1:
-                if(day <1 || day >  month30) {
+            case Calendar.OCTOBER + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
-            case Calendar.DECEMBER+1:
-                if(day <1 || day >  month31) {
+
+            case Calendar.NOVEMBER + 1:
+                if (day < 1 || day > month30) {
+                    return false;
+                }
+                break;
+            case Calendar.DECEMBER + 1:
+                if (day < 1 || day > month31) {
                     return false;
                 }
                 break;
@@ -193,13 +201,16 @@ public class Date {
     }
 }
 
-class MainTest{
+/**
+ * Main test bed to check the validity of a date entered by using isValid() method.
+ */
+class MainTest {
     public static void main(String[] args) {
         /********** FUTURE DATE TESTING  **********/
-         System.out.println("Future Date Testing for 03/20/2021");
-         Date futureDate = new Date("03/20/2021");
-         System.out.println("isValid() returns: " + futureDate.isValid());
-         System.out.println("Expected result: false" + "\n");
+        System.out.println("Future Date Testing for 03/20/2021");
+        Date futureDate = new Date("03/20/2021");
+        System.out.println("isValid() returns: " + futureDate.isValid());
+        System.out.println("Expected result: false" + "\n");
 
         System.out.println("Future Date Testing for 03/20/2023");
         Date futureDate1 = new Date("03/20/2023");
@@ -239,18 +250,18 @@ class MainTest{
 
         System.out.println("Testing for 2/32/2018");
         Date test7 = new Date("2/32/2018");
-        System.out.println("isValid() returns:"+ test7.isValid());
+        System.out.println("isValid() returns:" + test7.isValid());
         System.out.println("Expected result: false" + "\n");
 
         System.out.println("Testing for 02/00/2018");
         Date test8 = new Date("02/00/2018");
-        System.out.println("isValid() returns:"+ test8.isValid());
+        System.out.println("isValid() returns:" + test8.isValid());
         System.out.println("Expected result: false" + "\n");
 
         System.out.println("Testing for 02/01/2018");
         Date dayTest3 = new Date("02/01/2018");
-        System.out.println("isValid() returns:"+ dayTest3.isValid());
-        System.out.println("Expected result: true"+"\n");
+        System.out.println("isValid() returns:" + dayTest3.isValid());
+        System.out.println("Expected result: true" + "\n");
 
 
     }
